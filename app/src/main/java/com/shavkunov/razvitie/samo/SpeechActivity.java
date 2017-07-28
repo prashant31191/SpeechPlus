@@ -8,6 +8,6 @@ public class SpeechActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_speech);
+        setContentView(R.layout.activity_fragment);
     }
 }
