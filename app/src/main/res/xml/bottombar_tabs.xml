@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        activeColor="#00796B"
+        icon="@drawable/home"
+        id="@+id/tab_home"
+        inActiveColor="#757575"
+        title="@string/tongue_twisters"/>
+
+    <tab
+        activeColor="#00796B"
+        icon="@drawable/heart"
+        id="@+id/tab_favorites"
+        inActiveColor="#757575"
+        title="@string/favorites"/>
+
+    <tab
+        activeColor="#00796B"
+        icon="@drawable/settings"
+        id="@+id/tab_settings"
+        inActiveColor="#757575"
+        title="@string/settings"/>
+</tabs>
