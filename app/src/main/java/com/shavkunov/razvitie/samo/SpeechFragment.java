@@ -19,6 +19,10 @@ public class SpeechFragment extends Fragment {
     @BindView(R.id.speech_recycler_view)
     RecyclerView speechRecyclerView;
 
+    public static Fragment newInstance() {
+        return new SpeechFragment();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
