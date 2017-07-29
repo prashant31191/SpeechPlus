@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.yarolegovich.discretescrollview.DiscreteScrollView;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -17,8 +19,8 @@ public class SpeechFragment extends Fragment {
 
     private Unbinder unbinder;
 
-    @BindView(R.id.speech_recycler_view)
-    RecyclerView speechRecyclerView;
+    @BindView(R.id.speech_discrete)
+    DiscreteScrollView speechDiscreteScrollView;
 
     public static Fragment newInstance() {
         return new SpeechFragment();
@@ -30,9 +32,8 @@ public class SpeechFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_speech, container, false);
         unbinder = ButterKnife.bind(this, view);
 
-        speechRecyclerView.setNestedScrollingEnabled(false);
-        speechRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        speechRecyclerView.setAdapter(new SpeechAdapter());
+        speechDiscreteScrollView.setNestedScrollingEnabled(false);
+        speechDiscreteScrollView.setAdapter(new SpeechAdapter());
         return view;
     }
 
