@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="card_view">15dp</dimen>
+    <dimen name="card_view">10dp</dimen>
     <dimen name="card_corner_radius">6dp</dimen>
+    <dimen name="title_size">25sp</dimen>
+    <dimen name="title_text_margin">5dp</dimen>
 </resources>

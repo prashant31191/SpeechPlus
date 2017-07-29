@@ -2,14 +2,11 @@ package com.shavkunov.razvitie.samo;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.yarolegovich.discretescrollview.DiscreteScrollView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,8 +16,8 @@ public class SpeechFragment extends Fragment {
 
     private Unbinder unbinder;
 
-    @BindView(R.id.speech_discrete)
-    DiscreteScrollView speechDiscreteScrollView;
+    @BindView(R.id.speech_recycler)
+    RecyclerView speechRecycler;
 
     public static Fragment newInstance() {
         return new SpeechFragment();
@@ -32,8 +29,9 @@ public class SpeechFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_speech, container, false);
         unbinder = ButterKnife.bind(this, view);
 
-        speechDiscreteScrollView.setNestedScrollingEnabled(false);
-        speechDiscreteScrollView.setAdapter(new SpeechAdapter());
+        speechRecycler.setNestedScrollingEnabled(false);
+        speechRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
+        speechRecycler.setAdapter(new SpeechAdapter());
         return view;
     }
 
@@ -55,7 +53,7 @@ public class SpeechFragment extends Fragment {
         @Override
         public SpeechHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater inflater = LayoutInflater.from(getActivity());
-            View view = inflater.inflate(R.layout.card_view, parent, false);
+            View view = inflater.inflate(R.layout.card_view_speech, parent, false);
             return new SpeechHolder(view);
         }
 

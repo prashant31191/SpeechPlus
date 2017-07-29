@@ -16,7 +16,7 @@ public class FavoritesFragment extends Fragment {
 
     private Unbinder unbinder;
 
-    @BindView(R.id.favorites_recycler_view)
+    @BindView(R.id.favorites_recycler)
     RecyclerView favoritesRecyclerView;
 
     public static Fragment newInstance() {
@@ -53,7 +53,7 @@ public class FavoritesFragment extends Fragment {
         @Override
         public FavoritesHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater inflater = LayoutInflater.from(getActivity());
-            View view = inflater.inflate(R.layout.card_view, parent, false);
+            View view = inflater.inflate(R.layout.card_view_speech, parent, false);
             return new FavoritesHolder(view);
         }
 
