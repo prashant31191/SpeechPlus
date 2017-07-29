@@ -3,12 +3,26 @@ package com.shavkunov.razvitie.samo;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+
+import butterknife.ButterKnife;
 
 public abstract class SingleFragmentActivity extends AppCompatActivity {
 
     protected abstract Fragment createFragment();
+
+    protected void replaceFragment() {
+        Fragment fragment = createFragment();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.fragment_container, fragment);
+        ft.commit();
+    }
+
+    // Переопределить, если необходимо установить слушателя для Navigation Bar Bottom
+    protected void setBottomBar() {
+        ButterKnife.bind(this);
+    }
 
     @LayoutRes
     protected int getLayoutResId() {
@@ -20,13 +34,7 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResId());
 
-        FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.fragment_container);
-        if (fragment == null) {
-            fragment = createFragment();
-            fm.beginTransaction()
-                    .add(R.id.fragment_container, fragment)
-                    .commit();
-        }
+        setBottomBar();
+        replaceFragment();
     }
 }
