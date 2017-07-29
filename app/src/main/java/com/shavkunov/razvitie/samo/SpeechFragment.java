@@ -16,6 +16,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class SpeechFragment extends Fragment {
@@ -81,13 +82,21 @@ public class SpeechFragment extends Fragment {
 
 
         @Override
-        public void onBindViewHolder(SpeechHolder holder, int position) {
+        public void onBindViewHolder(final SpeechHolder holder, int position) {
             holder.imageSpeech.setImageResource(cards.get(position)
                     .getImageResId());
             holder.titleSpeech.setText(cards.get(position)
                     .getTitle());
             holder.favoriteButtonSpeech.setChecked(cards.get(position)
-            .isClick());
+                    .isClick());
+
+            holder.favoriteButtonSpeech.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    cards.get(holder.getAdapterPosition()).setClick(
+                            holder.favoriteButtonSpeech.isChecked());
+                }
+            });
         }
 
         @Override
