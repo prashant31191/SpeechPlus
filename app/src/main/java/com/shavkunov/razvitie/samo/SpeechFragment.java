@@ -7,12 +7,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 public class SpeechFragment extends Fragment {
+
+    private List<CardData> cards;
 
     private Unbinder unbinder;
 
@@ -29,6 +35,9 @@ public class SpeechFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_speech, container, false);
         unbinder = ButterKnife.bind(this, view);
 
+        cards = CardLab.getInstance(getActivity())
+                .getCards();
+
         speechRecycler.setNestedScrollingEnabled(false);
         speechRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
         speechRecycler.setAdapter(new SpeechAdapter());
@@ -43,8 +52,15 @@ public class SpeechFragment extends Fragment {
 
     public class SpeechHolder extends RecyclerView.ViewHolder {
 
+        @BindView(R.id.image_speech)
+        ImageView imageSpeech;
+
+        @BindView(R.id.title_speech)
+        TextView titleSpeech;
+
         public SpeechHolder(View itemView) {
             super(itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 
@@ -57,14 +73,18 @@ public class SpeechFragment extends Fragment {
             return new SpeechHolder(view);
         }
 
+
         @Override
         public void onBindViewHolder(SpeechHolder holder, int position) {
-
+            holder.imageSpeech.setImageResource(cards.get(position)
+                    .getImageResId());
+            holder.titleSpeech.setText(cards.get(position)
+                    .getTitle());
         }
 
         @Override
         public int getItemCount() {
-            return 10;
+            return cards.size();
         }
     }
 }
