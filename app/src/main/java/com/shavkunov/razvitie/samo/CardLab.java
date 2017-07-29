@@ -22,11 +22,11 @@ public class CardLab {
     private CardLab(Context context) {
         cards = new ArrayList<>();
         cards.add(new CardData(R.drawable.bear,
-                context.getString(R.string.test)));
+                context.getString(R.string.test), false));
         cards.add(new CardData(R.drawable.bear,
-                context.getString(R.string.test1)));
+                context.getString(R.string.test1), false));
         cards.add(new CardData(R.drawable.bear,
-                context.getString(R.string.test2)));
+                context.getString(R.string.test2), false));
     }
 
     public List<CardData> getCards() {

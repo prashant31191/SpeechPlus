@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.sackcentury.shinebuttonlib.ShineButton;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -58,9 +60,13 @@ public class SpeechFragment extends Fragment {
         @BindView(R.id.title_speech)
         TextView titleSpeech;
 
+        @BindView(R.id.favorite_button_speech)
+        ShineButton favoriteButtonSpeech;
+
         public SpeechHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            favoriteButtonSpeech.init(getActivity());
         }
     }
 
@@ -80,6 +86,8 @@ public class SpeechFragment extends Fragment {
                     .getImageResId());
             holder.titleSpeech.setText(cards.get(position)
                     .getTitle());
+            holder.favoriteButtonSpeech.setChecked(cards.get(position)
+            .isClick());
         }
 
         @Override
