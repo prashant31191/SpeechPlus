@@ -23,13 +23,13 @@ public class SpeechActivity extends SingleFragmentActivity {
             public void onTabSelected(@IdRes int tabId) {
                 switch (tabId) {
                     case R.id.tab_home:
-                        fragment = new SpeechFragment();
+                        fragment = SpeechFragment.newInstance();
                         break;
                     case R.id.tab_favorites:
-                        fragment = new FavoritesFragment();
+                        fragment = FavoritesFragment.newInstance();
                         break;
                     case R.id.tab_settings:
-                        fragment = new SettingsFragment();
+                        fragment = SettingsFragment.newInstance();
                         break;
                 }
 
