@@ -30,6 +30,7 @@ public class SpeechFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_speech, container, false);
         unbinder = ButterKnife.bind(this, view);
 
+        speechRecyclerView.setNestedScrollingEnabled(false);
         speechRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         speechRecyclerView.setAdapter(new SpeechAdapter());
         return view;
@@ -64,7 +65,7 @@ public class SpeechFragment extends Fragment {
 
         @Override
         public int getItemCount() {
-            return 2;
+            return 10;
         }
     }
 }

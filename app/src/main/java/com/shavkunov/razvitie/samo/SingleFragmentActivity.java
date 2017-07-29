@@ -20,6 +20,7 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
     }
 
     // Переопределить, если необходимо установить слушателя для Navigation Bar Bottom
+    // Override, if you need to set the listener for Navigation Bar Bottom
     protected void setBottomBar() {
         ButterKnife.bind(this);
     }
