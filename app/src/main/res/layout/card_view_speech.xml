@@ -18,7 +18,7 @@
         <ImageView
             android:id="@+id/image_speech"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="180dp"
             android:scaleType="centerCrop"
             tools:src="@drawable/bear"/>
 
@@ -26,12 +26,26 @@
             android:id="@+id/title_speech"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="@dimen/title_text_margin"
             android:fontFamily="sans-serif-condensed"
             android:gravity="center"
-            android:layout_margin="@dimen/title_text_margin"
             android:text="@string/test"
             android:textSize="@dimen/title_size"/>
+
+        <com.sackcentury.shinebuttonlib.ShineButton
+            android:id="@+id/po_image1"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="end"
+            android:layout_margin="@dimen/favorite_button_margin"
+            android:src="@android:color/darker_gray"
+            app:allow_random_color="false"
+            app:btn_color="@android:color/darker_gray"
+            app:btn_fill_color="#FF6666"
+            app:click_animation_duration="150"
+            app:shine_animation_duration="1000"
+            app:shine_count="10"
+            app:shine_turn_angle="30"
+            app:siShape="@raw/heart"/>
     </LinearLayout>
-
-
 </android.support.v7.widget.CardView>
