@@ -14,13 +14,15 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.sackcentury.shinebuttonlib.ShineButton;
-import com.shavkunov.razvitie.samo.Model.Patter;
 import com.shavkunov.razvitie.samo.R;
+import com.shavkunov.razvitie.samo.entity.Patter;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -44,6 +46,12 @@ public class SpeechFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        new PatterTask().execute();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_speech, container, false);
@@ -53,8 +61,6 @@ public class SpeechFragment extends Fragment {
         speechRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new SpeechAdapter();
         speechRecycler.setAdapter(adapter);
-
-        new PatterTask().execute();
         return view;
     }
 
@@ -107,16 +113,16 @@ public class SpeechFragment extends Fragment {
         }
     }
 
-    private class PatterTask extends AsyncTask<Void, Void, Patter> {
+    private class PatterTask extends AsyncTask<Void, Void, Patter[]> {
 
         @Override
-        protected Patter doInBackground(Void... params) {
+        protected Patter[] doInBackground(Void... params) {
             try {
-                final String url = "https://speechapp-service.herokuapp.com/one";
+                final String url = "https://speechapp-service.herokuapp.com/get";
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-                Patter patter = restTemplate.getForObject(url, Patter.class);
-                return patter;
+                ResponseEntity<Patter[]> responseEntity = restTemplate.getForEntity(url, Patter[].class);
+                return responseEntity.getBody();
             } catch (Exception e) {
                 Log.e(TAG, e.getMessage());
             }
@@ -125,8 +131,8 @@ public class SpeechFragment extends Fragment {
         }
 
         @Override
-        protected void onPostExecute(Patter patter) {
-            cards.add(patter);
+        protected void onPostExecute(Patter[] patters) {
+            Collections.addAll(cards, patters);
             adapter.notifyDataSetChanged();
         }
     }

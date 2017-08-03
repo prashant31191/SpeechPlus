@@ -1,4 +1,4 @@
-package com.shavkunov.razvitie.samo.Model;
+package com.shavkunov.razvitie.samo.entity;
 
 public class Patter {
 
