@@ -6,33 +6,15 @@ public class Patter {
     private String imageUrl;
     private String title;
 
-    public Patter(long id, String imageUrl, String title) {
-        this.id = id;
-        this.imageUrl = imageUrl;
-        this.title = title;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
+    public Long getId() {
+        return this.id;
     }
 
     public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+        return this.imageUrl;
     }
 
     public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
+        return this.title;
     }
 }
