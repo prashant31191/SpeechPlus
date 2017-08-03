@@ -10,18 +10,18 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.sackcentury.shinebuttonlib.ShineButton;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class SpeechFragment extends Fragment {
 
-    private List<CardData> cards;
+    private List<Patter> cards;
 
     private Unbinder unbinder;
 
@@ -83,20 +83,11 @@ public class SpeechFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(final SpeechHolder holder, int position) {
-            holder.imageSpeech.setImageResource(cards.get(position)
-                    .getImageResId());
+            Glide.with(holder.itemView.getContext())
+                    .load(cards.get(position).getImageUrl())
+                    .into(holder.imageSpeech);
             holder.titleSpeech.setText(cards.get(position)
                     .getTitle());
-            holder.favoriteButtonSpeech.setChecked(cards.get(position)
-                    .isClick());
-
-            holder.favoriteButtonSpeech.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    cards.get(holder.getAdapterPosition()).setClick(
-                            holder.favoriteButtonSpeech.isChecked());
-                }
-            });
         }
 
         @Override
