@@ -56,7 +56,6 @@ public class SpeechFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_speech, container, false);
         unbinder = ButterKnife.bind(this, view);
-
         speechRecycler.setNestedScrollingEnabled(false);
         speechRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new SpeechAdapter();
@@ -132,8 +131,10 @@ public class SpeechFragment extends Fragment {
 
         @Override
         protected void onPostExecute(Patter[] patters) {
-            Collections.addAll(cards, patters);
-            adapter.notifyDataSetChanged();
+            if (patters != null) {
+                Collections.addAll(cards, patters);
+                adapter.notifyDataSetChanged();
+            }
         }
     }
 }
