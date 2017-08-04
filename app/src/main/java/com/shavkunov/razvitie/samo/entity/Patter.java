@@ -4,16 +4,33 @@ public class Patter {
     private long id;
     private String imageUrl;
     private String title;
+    private int isFavorite;
 
     public Long getId() {
-        return this.id;
+        return id;
     }
 
     public String getImageUrl() {
-        return this.imageUrl;
+        return imageUrl;
     }
 
     public String getTitle() {
-        return this.title;
+        return title;
+    }
+
+    public int getFavorite() {
+        return isFavorite;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setFavorite(int favorite) {
+        isFavorite = favorite;
     }
 }
