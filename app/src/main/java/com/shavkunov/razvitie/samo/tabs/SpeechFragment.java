@@ -1,9 +1,12 @@
 package com.shavkunov.razvitie.samo.tabs;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +19,10 @@ import com.shavkunov.razvitie.samo.R;
 import com.shavkunov.razvitie.samo.entity.Patter;
 import com.shavkunov.razvitie.samo.entity.PatterLab;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,10 +32,13 @@ import butterknife.Unbinder;
 
 public class SpeechFragment extends Fragment {
 
+    private static final String TAG = "SpeechFragment";
+
     private List<Patter> patters = new ArrayList<>();
 
     private Unbinder unbinder;
     private SpeechAdapter adapter;
+    private PatterLab patterLab;
 
     @BindView(R.id.speech_recycler)
     RecyclerView speechRecycler;
@@ -42,7 +52,9 @@ public class SpeechFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_speech, container, false);
         unbinder = ButterKnife.bind(this, view);
-        patters = PatterLab.getInstance(getContext()).getList();
+        patterLab = PatterLab.getInstance(getContext());
+        new PatterTask().execute();
+        updatePatters(patterLab);
         setRecyclerView();
         return view;
     }
@@ -58,6 +70,10 @@ public class SpeechFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    private void updatePatters(PatterLab patterLab) {
+        patters = patterLab.getList();
     }
 
     public class SpeechHolder extends RecyclerView.ViewHolder {
@@ -95,11 +111,49 @@ public class SpeechFragment extends Fragment {
                     .into(holder.imageSpeech);
             holder.titleSpeech.setText(patters.get(position)
                     .getTitle());
+            holder.favoriteButtonSpeech.setChecked(patters.get(position).isFavorite());
+            holder.favoriteButtonSpeech.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    PatterLab.getInstance(getContext())
+                            .updatePatter(patters.get(holder.getAdapterPosition()));
+                }
+            });
         }
 
         @Override
         public int getItemCount() {
             return patters.size();
+        }
+    }
+
+    private class PatterTask extends AsyncTask<Void, Void, Patter[]> {
+
+        @Override
+        protected Patter[] doInBackground(Void... params) {
+            try {
+                final String url = "https://speechapp-service.herokuapp.com/get";
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+                ResponseEntity<Patter[]> responseEntity = restTemplate.getForEntity(url, Patter[].class);
+                return responseEntity.getBody();
+            } catch (Exception e) {
+                Log.e(TAG, e.getMessage());
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Patter[] p) {
+            if (p != null) {
+                for (Patter patter : p) {
+                    patterLab.addPatter(patter);
+                }
+
+                updatePatters(patterLab);
+                adapter.notifyDataSetChanged();
+            }
         }
     }
 }

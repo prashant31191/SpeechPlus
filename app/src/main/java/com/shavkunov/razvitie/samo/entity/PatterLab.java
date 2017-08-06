@@ -4,25 +4,15 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.AsyncTask;
-import android.util.Log;
 
 import com.shavkunov.razvitie.samo.database.SpeechBaseHelper;
 import com.shavkunov.razvitie.samo.database.SpeechCursorWrapper;
-import com.shavkunov.razvitie.samo.database.SpeechDbSchema;
 import com.shavkunov.razvitie.samo.database.SpeechDbSchema.SpeechTable;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.web.client.RestTemplate;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class PatterLab {
-
-    private static final String TAG = "PatterLab";
 
     private static PatterLab patterLab;
 
@@ -39,7 +29,6 @@ public class PatterLab {
     private PatterLab(Context c) {
         database = new SpeechBaseHelper(c)
                 .getWritableDatabase();
-        new PatterTask().execute();
     }
 
     public List<Patter> getList() {
@@ -68,9 +57,18 @@ public class PatterLab {
         return values;
     }
 
-    private void addPatter(Patter p) {
+    public void addPatter(Patter p) {
         ContentValues values = getContentValues(p);
         database.insert(SpeechTable.NAME, null, values);
+    }
+
+    public void updatePatter(Patter patter) {
+        ContentValues values = getContentValues(patter);
+        values.put(SpeechTable.Cols.FAVORITE, true);
+
+        database.update(SpeechTable.NAME, values,
+                SpeechTable.Cols.TITLE + " = ?",
+                new String[] { patter.getTitle() });
     }
 
     private SpeechCursorWrapper queryPatters(String whereClause, String[] whereArgs) {
@@ -85,32 +83,5 @@ public class PatterLab {
         );
 
         return new SpeechCursorWrapper(cursor);
-    }
-
-    private class PatterTask extends AsyncTask<Void, Void, Patter[]> {
-
-        @Override
-        protected Patter[] doInBackground(Void... params) {
-            try {
-                final String url = "https://speechapp-service.herokuapp.com/get";
-                RestTemplate restTemplate = new RestTemplate();
-                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-                ResponseEntity<Patter[]> responseEntity = restTemplate.getForEntity(url, Patter[].class);
-                return responseEntity.getBody();
-            } catch (Exception e) {
-                Log.e(TAG, e.getMessage());
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Patter[] p) {
-            if (p != null) {
-                for (Patter patter : p) {
-                    addPatter(patter);
-                }
-            }
-        }
     }
 }
