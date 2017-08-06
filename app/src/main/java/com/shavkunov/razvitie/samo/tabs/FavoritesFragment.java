@@ -22,6 +22,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
 
 public class FavoritesFragment extends Fragment {
 
@@ -49,6 +50,7 @@ public class FavoritesFragment extends Fragment {
     }
 
     private void setRecyclerView() {
+        favoritesRecyclerView.setItemAnimator(new SlideInLeftAnimator());
         favoritesRecyclerView.setNestedScrollingEnabled(false);
         favoritesRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         favoritesRecyclerView.setAdapter(new FavoritesAdapter());
@@ -99,6 +101,10 @@ public class FavoritesFragment extends Fragment {
                 public void onClick(View v) {
                     patterLab.updatePatter(patters.get(holder.getAdapterPosition()),
                             holder.favoriteButtonSpeech.isChecked());
+                    if (patters.size() != 0) {
+                        patters.remove(holder.getAdapterPosition());
+                    }
+                    notifyItemRemoved(holder.getAdapterPosition());
                 }
             });
         }

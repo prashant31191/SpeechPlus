@@ -46,4 +46,5 @@ dependencies {
     compile 'com.sackcentury:shinebutton:0.1.9'
     compile 'org.springframework.android:spring-android-rest-template:1.0.1.RELEASE'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.3.2'
+    compile 'jp.wasabeef:recyclerview-animators:2.2.7'
 }

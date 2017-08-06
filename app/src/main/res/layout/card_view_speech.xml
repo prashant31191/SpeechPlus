@@ -18,7 +18,7 @@
         <ImageView
             android:id="@+id/image_speech"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="170dp"
             android:scaleType="centerCrop"
             tools:src="@drawable/bear"/>
 
