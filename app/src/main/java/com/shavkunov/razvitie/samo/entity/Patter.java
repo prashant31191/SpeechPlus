@@ -5,7 +5,7 @@ public class Patter {
     private long id;
     private String imageUrl;
     private String title;
-    private int isFavorite;
+    private boolean isFavorite;
 
     public Long getId() {
         return id;
@@ -15,23 +15,23 @@ public class Patter {
         return imageUrl;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public int getFavorite() {
-        return isFavorite;
-    }
-
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
     }
 
-    public void setFavorite(int favorite) {
+    public boolean isFavorite() {
+        return isFavorite;
+    }
+
+    public void setFavorite(boolean favorite) {
         isFavorite = favorite;
     }
 }

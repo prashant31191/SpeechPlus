@@ -25,7 +25,7 @@ import butterknife.Unbinder;
 
 public class SpeechFragment extends Fragment {
 
-    private List<Patter> cards = new ArrayList<>();
+    private List<Patter> patters = new ArrayList<>();
 
     private Unbinder unbinder;
     private SpeechAdapter adapter;
@@ -42,7 +42,7 @@ public class SpeechFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_speech, container, false);
         unbinder = ButterKnife.bind(this, view);
-        cards = PatterLab.getInstance().getList();
+        patters = PatterLab.getInstance(getContext()).getList();
         setRecyclerView();
         return view;
     }
@@ -91,15 +91,15 @@ public class SpeechFragment extends Fragment {
         @Override
         public void onBindViewHolder(final SpeechHolder holder, int position) {
             Glide.with(holder.itemView.getContext())
-                    .load(cards.get(position).getImageUrl())
+                    .load(patters.get(position).getImageUrl())
                     .into(holder.imageSpeech);
-            holder.titleSpeech.setText(cards.get(position)
+            holder.titleSpeech.setText(patters.get(position)
                     .getTitle());
         }
 
         @Override
         public int getItemCount() {
-            return cards.size();
+            return patters.size();
         }
     }
 }
