@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.shavkunov.razvitie.samo.database.SpeechDbSchema.SpeechTable;
 
 public class SpeechBaseHelper extends SQLiteOpenHelper {
+
     private static final int VERSION = 1;
     private static final String DATABASE_NAME = "speechBase.db";
 

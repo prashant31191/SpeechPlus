@@ -1,6 +1,7 @@
 package com.shavkunov.razvitie.samo.entity;
 
 public class Patter {
+
     private long id;
     private String imageUrl;
     private String title;
