@@ -7,8 +7,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.sackcentury.shinebuttonlib.ShineButton;
 import com.shavkunov.razvitie.samo.R;
+import com.shavkunov.razvitie.samo.entity.Patter;
+import com.shavkunov.razvitie.samo.entity.PatterLab;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -16,6 +25,9 @@ import butterknife.Unbinder;
 
 public class FavoritesFragment extends Fragment {
 
+    private List<Patter> patters = new ArrayList<>();
+
+    private PatterLab patterLab;
     private Unbinder unbinder;
 
     @BindView(R.id.favorites_recycler)
@@ -30,11 +42,16 @@ public class FavoritesFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favorites, container, false);
         unbinder = ButterKnife.bind(this, view);
+        patterLab = PatterLab.getInstance(getContext());
+        patters = patterLab.getFavoriteList();
+        setRecyclerView();
+        return view;
+    }
 
+    private void setRecyclerView() {
         favoritesRecyclerView.setNestedScrollingEnabled(false);
         favoritesRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         favoritesRecyclerView.setAdapter(new FavoritesAdapter());
-        return view;
     }
 
     @Override
@@ -43,10 +60,21 @@ public class FavoritesFragment extends Fragment {
         unbinder.unbind();
     }
 
-    private class FavoritesHolder extends RecyclerView.ViewHolder {
+    public class FavoritesHolder extends RecyclerView.ViewHolder {
+
+        @BindView(R.id.image_speech)
+        ImageView imageSpeech;
+
+        @BindView(R.id.title_speech)
+        TextView titleSpeech;
+
+        @BindView(R.id.favorite_button_speech)
+        ShineButton favoriteButtonSpeech;
 
         public FavoritesHolder(View itemView) {
             super(itemView);
+            ButterKnife.bind(this, itemView);
+            favoriteButtonSpeech.init(getActivity());
         }
     }
 
@@ -60,13 +88,24 @@ public class FavoritesFragment extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(FavoritesHolder holder, int position) {
-
+        public void onBindViewHolder(final FavoritesHolder holder, int position) {
+            Glide.with(holder.itemView.getContext())
+                    .load(patters.get(position).getImageUrl())
+                    .into(holder.imageSpeech);
+            holder.titleSpeech.setText(patters.get(position).getTitle());
+            holder.favoriteButtonSpeech.setChecked(patters.get(position).isFavorite());
+            holder.favoriteButtonSpeech.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    patterLab.updatePatter(patters.get(holder.getAdapterPosition()),
+                            holder.favoriteButtonSpeech.isChecked());
+                }
+            });
         }
 
         @Override
         public int getItemCount() {
-            return 10;
+            return patters.size();
         }
     }
 }

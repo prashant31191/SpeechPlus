@@ -28,6 +28,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class SpeechFragment extends Fragment {
@@ -103,20 +104,18 @@ public class SpeechFragment extends Fragment {
             return new SpeechHolder(view);
         }
 
-
         @Override
         public void onBindViewHolder(final SpeechHolder holder, int position) {
             Glide.with(holder.itemView.getContext())
                     .load(patters.get(position).getImageUrl())
                     .into(holder.imageSpeech);
-            holder.titleSpeech.setText(patters.get(position)
-                    .getTitle());
+            holder.titleSpeech.setText(patters.get(position).getTitle());
             holder.favoriteButtonSpeech.setChecked(patters.get(position).isFavorite());
             holder.favoriteButtonSpeech.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    PatterLab.getInstance(getContext())
-                            .updatePatter(patters.get(holder.getAdapterPosition()));
+                    patterLab.updatePatter(patters.get(holder.getAdapterPosition()),
+                            holder.favoriteButtonSpeech.isChecked());
                 }
             });
         }
