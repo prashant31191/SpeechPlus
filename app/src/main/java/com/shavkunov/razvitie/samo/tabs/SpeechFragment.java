@@ -2,7 +2,6 @@ package com.shavkunov.razvitie.samo.tabs;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.sackcentury.shinebuttonlib.ShineButton;
@@ -24,11 +24,11 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class SpeechFragment extends Fragment {
@@ -145,8 +145,27 @@ public class SpeechFragment extends Fragment {
 
         @Override
         protected void onPostExecute(Patter[] p) {
+            List<Patter> oldVersion = patterLab.getList();
+            List<Patter> newVersion = new ArrayList<>();
+
             if (p != null) {
-                for (Patter patter : p) {
+                Collections.addAll(newVersion, p);
+            }
+
+            if (oldVersion.size() != 0) {
+                for (int i = 0; i < oldVersion.size(); i++) {
+                    for (int j = 0; j < newVersion.size(); j++) {
+                        if (oldVersion.get(i).getTitle().equals(
+                                newVersion.get(j).getTitle())) {
+                            newVersion.remove(j);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (newVersion.size() != 0) {
+                for (Patter patter : newVersion) {
                     patterLab.addPatter(patter);
                 }
 

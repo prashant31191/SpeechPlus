@@ -99,12 +99,12 @@ public class FavoritesFragment extends Fragment {
             holder.favoriteButtonSpeech.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    patterLab.updatePatter(patters.get(holder.getAdapterPosition()),
-                            holder.favoriteButtonSpeech.isChecked());
                     if (patters.size() != 0) {
+                        patterLab.updatePatter(patters.get(holder.getAdapterPosition()),
+                                holder.favoriteButtonSpeech.isChecked());
                         patters.remove(holder.getAdapterPosition());
+                        notifyItemRemoved(holder.getAdapterPosition());
                     }
-                    notifyItemRemoved(holder.getAdapterPosition());
                 }
             });
         }

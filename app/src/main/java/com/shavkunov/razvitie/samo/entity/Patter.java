@@ -7,7 +7,7 @@ public class Patter {
     private String title;
     private boolean isFavorite;
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 

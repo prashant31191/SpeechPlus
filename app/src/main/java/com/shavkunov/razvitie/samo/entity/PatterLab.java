@@ -72,7 +72,6 @@ public class PatterLab {
         values.put(SpeechTable.Cols.URL, patter.getImageUrl());
         values.put(SpeechTable.Cols.TITLE, patter.getTitle());
         values.put(SpeechTable.Cols.FAVORITE, patter.isFavorite() ? 1 : 0);
-
         return values;
     }
 
