@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.sackcentury.shinebuttonlib.ShineButton;
@@ -40,6 +39,7 @@ public class SpeechFragment extends Fragment {
     private Unbinder unbinder;
     private SpeechAdapter adapter;
     private PatterLab patterLab;
+    private AsyncTask patterTask;
 
     @BindView(R.id.speech_recycler)
     RecyclerView speechRecycler;
@@ -54,7 +54,7 @@ public class SpeechFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_speech, container, false);
         unbinder = ButterKnife.bind(this, view);
         patterLab = PatterLab.getInstance(getContext());
-        new PatterTask().execute();
+        patterTask = new PatterTask().execute();
         updatePatters(patterLab);
         setRecyclerView();
         return view;
@@ -71,6 +71,7 @@ public class SpeechFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        patterTask.cancel(true);
     }
 
     private void updatePatters(PatterLab patterLab) {
@@ -152,7 +153,7 @@ public class SpeechFragment extends Fragment {
                 Collections.addAll(newVersion, p);
             }
 
-            if (oldVersion.size() != 0) {
+            if (newVersion.size() != 0 && oldVersion.size() != 0) {
                 for (int i = 0; i < oldVersion.size(); i++) {
                     for (int j = 0; j < newVersion.size(); j++) {
                         if (oldVersion.get(i).getTitle().equals(
