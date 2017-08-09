@@ -65,8 +65,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemViewType(int position) {
-        return SPEECH_HOLDER;
-        //return (position % 8 == 0) ? AD_HOLDER : SPEECH_HOLDER;
+        Object o = listItems.get(position);
+
+        if (o instanceof Patter) {
+            return SPEECH_HOLDER;
+        } else {
+            return AD_HOLDER;
+        }
     }
 
     @Override
@@ -110,8 +115,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             case AD_HOLDER:
                 NativeExpressAdViewHolder adViewHolder =
                         (NativeExpressAdViewHolder) holder;
-                NativeExpressAdView adView =
-                        (NativeExpressAdView) listItems.get(position);
+                NativeExpressAdView adView = (NativeExpressAdView)
+                        listItems.get(position);
+
                 ViewGroup adCardView = (ViewGroup) adViewHolder.itemView;
 
                 if (adCardView.getChildCount() > 0) {

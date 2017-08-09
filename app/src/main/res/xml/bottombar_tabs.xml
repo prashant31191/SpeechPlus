@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <tabs>
     <tab
-        activeColor="@color/colorBottomBarActive"
+        activeColor="@color/colorAccent"
         icon="@drawable/home"
         id="@+id/tab_home"
         inActiveColor="@color/colorBottomBarInActive"
         title="@string/tongue_twisters"/>
 
     <tab
-        activeColor="@color/colorBottomBarActive"
+        activeColor="@color/colorAccent"
         icon="@drawable/heart"
         id="@+id/tab_favorites"
         inActiveColor="@color/colorBottomBarInActive"
         title="@string/favorites"/>
 
     <tab
-        activeColor="@color/colorBottomBarActive"
+        activeColor="@color/colorAccent"
         icon="@drawable/settings"
         id="@+id/tab_settings"
         inActiveColor="@color/colorBottomBarInActive"
