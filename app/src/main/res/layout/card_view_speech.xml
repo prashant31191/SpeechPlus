@@ -41,7 +41,7 @@
             android:src="@android:color/darker_gray"
             app:allow_random_color="false"
             app:btn_color="@android:color/darker_gray"
-            app:btn_fill_color="#FF6666"
+            app:btn_fill_color="@color/colorFavoriteButton"
             app:click_animation_duration="150"
             app:shine_animation_duration="1000"
             app:shine_count="10"

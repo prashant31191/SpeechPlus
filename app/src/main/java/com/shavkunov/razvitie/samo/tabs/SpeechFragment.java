@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.sackcentury.shinebuttonlib.ShineButton;
 import com.shavkunov.razvitie.samo.R;
+import com.shavkunov.razvitie.samo.RecyclerViewAdapter;
 import com.shavkunov.razvitie.samo.entity.Patter;
 import com.shavkunov.razvitie.samo.entity.PatterLab;
 
@@ -34,12 +35,12 @@ public class SpeechFragment extends Fragment {
 
     private static final String TAG = "SpeechFragment";
 
-    private List<Patter> patters = new ArrayList<>();
+    private List<Object> patters = new ArrayList<>();
 
     private Unbinder unbinder;
-    private SpeechAdapter adapter;
     private PatterLab patterLab;
     private AsyncTask patterTask;
+    private RecyclerView.Adapter adapter;
 
     @BindView(R.id.speech_recycler)
     RecyclerView speechRecycler;
@@ -63,7 +64,7 @@ public class SpeechFragment extends Fragment {
     private void setRecyclerView() {
         speechRecycler.setNestedScrollingEnabled(false);
         speechRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new SpeechAdapter();
+        adapter = new RecyclerViewAdapter(getContext(), patters);
         speechRecycler.setAdapter(adapter);
     }
 
@@ -75,55 +76,8 @@ public class SpeechFragment extends Fragment {
     }
 
     private void updatePatters(PatterLab patterLab) {
-        patters = patterLab.getList();
-    }
-
-    public class SpeechHolder extends RecyclerView.ViewHolder {
-
-        @BindView(R.id.image_speech)
-        ImageView imageSpeech;
-
-        @BindView(R.id.title_speech)
-        TextView titleSpeech;
-
-        @BindView(R.id.favorite_button_speech)
-        ShineButton favoriteButtonSpeech;
-
-        public SpeechHolder(View itemView) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);
-            favoriteButtonSpeech.init(getActivity());
-        }
-    }
-
-    private class SpeechAdapter extends RecyclerView.Adapter<SpeechHolder> {
-
-        @Override
-        public SpeechHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            LayoutInflater inflater = LayoutInflater.from(getActivity());
-            View view = inflater.inflate(R.layout.card_view_speech, parent, false);
-            return new SpeechHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(final SpeechHolder holder, int position) {
-            Glide.with(holder.itemView.getContext())
-                    .load(patters.get(position).getImageUrl())
-                    .into(holder.imageSpeech);
-            holder.titleSpeech.setText(patters.get(position).getTitle());
-            holder.favoriteButtonSpeech.setChecked(patters.get(position).isFavorite());
-            holder.favoriteButtonSpeech.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    patterLab.updatePatter(patters.get(holder.getAdapterPosition()),
-                            holder.favoriteButtonSpeech.isChecked());
-                }
-            });
-        }
-
-        @Override
-        public int getItemCount() {
-            return patters.size();
+        for (int i = 0; i < patterLab.getList().size(); i++) {
+            patters.add(patterLab.getList().get(i));
         }
     }
 

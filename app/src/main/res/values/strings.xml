@@ -4,4 +4,8 @@
     <string name="favorites">Избранное</string>
     <string name="settings">Настройки</string>
     <string name="rating">Оценить приложение</string>
+
+    <!--AdMob-->
+    <string name="ad_api">ca-app-pub-5111154896006563~3633948331</string>
+    <string name="ad_id">ca-app-pub-5111154896006563/6784547543</string>
 </resources>
