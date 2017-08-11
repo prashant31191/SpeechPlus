@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
+import com.google.android.gms.ads.MobileAds;
+
 import butterknife.ButterKnife;
 
 public abstract class SingleFragmentActivity extends AppCompatActivity {
@@ -36,6 +38,7 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResId());
+        MobileAds.initialize(this, getString(R.string.ad_api));
 
         setBottomBar();
         replaceFragment();

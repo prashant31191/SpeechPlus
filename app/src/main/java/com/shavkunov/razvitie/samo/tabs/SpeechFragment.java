@@ -38,7 +38,8 @@ import butterknife.Unbinder;
 public class SpeechFragment extends Fragment {
 
     private static final String TAG = "SpeechFragment";
-    public static final int ITEMS_PER_AD = 45;
+    public static final int ITEMS_PER_AD = 40;
+    private static final int ITEMS_INDEX = 6;
 
     private List<Object> listItems = new ArrayList<>();
 
@@ -92,7 +93,7 @@ public class SpeechFragment extends Fragment {
 
     private void addNativeAds() {
         if (listItems.size() != 0 && isOnline()) {
-            for (int i = 0; i <= listItems.size(); i += ITEMS_PER_AD) {
+            for (int i = ITEMS_INDEX; i <= listItems.size(); i += ITEMS_PER_AD) {
                 final NativeExpressAdView adView = new NativeExpressAdView(getActivity());
                 listItems.add(i, adView);
             }
@@ -116,7 +117,7 @@ public class SpeechFragment extends Fragment {
             @Override
             public void run() {
                 final float scale = getActivity().getResources().getDisplayMetrics().density;
-                for (int i = 0; i <= listItems.size(); i += ITEMS_PER_AD) {
+                for (int i = ITEMS_INDEX; i <= listItems.size(); i += ITEMS_PER_AD) {
                     final NativeExpressAdView adView =
                             (NativeExpressAdView) listItems.get(i);
                     final CardView adCardView = (CardView) getActivity().findViewById(R.id.ad_card_view);
@@ -125,41 +126,10 @@ public class SpeechFragment extends Fragment {
                     AdSize adSize = new AdSize((int) (adWidth / scale), 150);
                     adView.setAdSize(adSize);
                     adView.setAdUnitId(getString(R.string.ad_id));
+                    adView.loadAd(new AdRequest.Builder().build());
                 }
-
-                loadNativeAd(0);
             }
         });
-    }
-
-    private void loadNativeAd(final int index) {
-        if (index >= listItems.size()) {
-            return;
-        }
-
-        Object item = listItems.get(index);
-        if (!(item instanceof NativeExpressAdView)) {
-            throw new ClassCastException("Expected item at index " + index + " to be a Native"
-                    + " Express ad.");
-        }
-
-        final NativeExpressAdView adView = (NativeExpressAdView) item;
-        adView.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-                super.onAdLoaded();
-                loadNativeAd(index + ITEMS_PER_AD);
-            }
-
-            @Override
-            public void onAdFailedToLoad(int errorCode) {
-                Log.e("SpeechFragment", "The previous Native Express ad failed to load. Attempting to"
-                        + " load the next Native Express ad in the items list.");
-                loadNativeAd(index + ITEMS_PER_AD);
-            }
-        });
-
-        adView.loadAd(new AdRequest.Builder().build());
     }
 
     private class PatterTask extends AsyncTask<Void, Void, Patter[]> {
