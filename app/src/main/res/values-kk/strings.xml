@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Сөйлеу+</string>
+    <string name="favorites">Таңдаулылар</string>
+    <string name="rating">Бағалау</string>
+    <string name="settings">Жөнге салу</string>
+    <string name="tongue_twisters">Жаңылтпаштар</string>
+
+    <!--AdMob-->
+    <string name="ad_api">ca-app-pub-5111154896006563~3633948331</string>
+    <string name="ad_id">ca-app-pub-5111154896006563/9312979281</string>
+</resources>

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Речь+</string>
     <string name="tongue_twisters">Скороговорки</string>
@@ -8,5 +9,4 @@
     <!--AdMob-->
     <string name="ad_api">ca-app-pub-5111154896006563~3633948331</string>
     <string name="ad_id">ca-app-pub-5111154896006563/9312979281</string>
-    <string name="test_id">ca-app-pub-3940256099942544/1072772517</string>
 </resources>

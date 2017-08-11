@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Гаворка+</string>
+    <string name="favorites">Абранае</string>
+    <string name="rating">Ацаніць прыкладанне</string>
+    <string name="settings">Налады</string>
+    <string name="tongue_twisters">Хуткамоўкі</string>
+
+    <!--AdMob-->
+    <string name="ad_api">ca-app-pub-5111154896006563~3633948331</string>
+    <string name="ad_id">ca-app-pub-5111154896006563/9312979281</string>
+</resources>

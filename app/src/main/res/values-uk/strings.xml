@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Мова+</string>
+    <string name="favorites">Вибране</string>
+    <string name="rating">Оцініть додаток</string>
+    <string name="settings">Налаштування</string>
+    <string name="tongue_twisters">Скоромовки</string>
+
+    <!--AdMob-->
+    <string name="ad_api">ca-app-pub-5111154896006563~3633948331</string>
+    <string name="ad_id">ca-app-pub-5111154896006563/1349663127</string>
+</resources>

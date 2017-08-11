@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Mowa+</string>
+    <string name="tongue_twisters">Łamigłówka słowna</string>
+    <string name="settings">Ustawienia</string>
+    <string name="rating">Oceń aplikację</string>
+    <string name="favorites">Ulubione</string>
+
+    <!--AdMob-->
+    <string name="ad_api">ca-app-pub-5111154896006563~3633948331</string>
+    <string name="ad_id">ca-app-pub-5111154896006563/6354400184</string>
+</resources>

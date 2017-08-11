@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Discurso+</string>
+    <string name="favorites">Favoritos</string>
+    <string name="rating">Avaliar</string>
+    <string name="settings">Configurações</string>
+    <string name="tongue_twisters">Trava Línguas</string>
+
+    <!--AdMob-->
+    <string name="ad_api">ca-app-pub-5111154896006563~3633948331</string>
+    <string name="ad_id">ca-app-pub-5111154896006563/8761071670</string>
+</resources>
