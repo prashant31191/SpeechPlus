@@ -1,6 +1,7 @@
 package com.shavkunov.razvitie.samo.tabs;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -9,12 +10,12 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.NativeExpressAdView;
@@ -72,9 +73,29 @@ public class SpeechFragment extends Fragment {
     private void setRecyclerView() {
         speechRecycler.setHasFixedSize(true);
         speechRecycler.setNestedScrollingEnabled(false);
-        speechRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
+        speechRecycler.setLayoutManager(getLayoutManager(getSizeScreen()));
         adapter = new RecyclerViewAdapter(getContext(), listItems);
         speechRecycler.setAdapter(adapter);
+    }
+
+    private RecyclerView.LayoutManager getLayoutManager(int sizeScreen) {
+        RecyclerView.LayoutManager lm;
+        switch (sizeScreen) {
+            case Configuration.SCREENLAYOUT_SIZE_XLARGE:
+                lm = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+                break;
+            case Configuration.SCREENLAYOUT_SIZE_NORMAL:
+            default:
+                lm = new LinearLayoutManager(getContext());
+                break;
+        }
+
+        return lm;
+    }
+
+    private int getSizeScreen() {
+        return getResources().getConfiguration().screenLayout &
+                Configuration.SCREENLAYOUT_SIZE_MASK;
     }
 
     @Override

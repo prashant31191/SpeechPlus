@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/card_view"
+    card_view:cardCornerRadius="@dimen/card_corner_radius">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/image_speech"
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/bear"/>
+
+        <TextView
+            android:id="@+id/title_speech"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/title_text_margin"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center"
+            android:textSize="@dimen/title_size"
+            tools:text="Text"/>
+
+        <com.sackcentury.shinebuttonlib.ShineButton
+            android:id="@+id/favorite_button_speech"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="end"
+            android:layout_margin="@dimen/favorite_button_margin"
+            android:src="@android:color/darker_gray"
+            app:allow_random_color="false"
+            app:btn_color="@android:color/darker_gray"
+            app:btn_fill_color="@color/colorFavoriteButton"
+            app:click_animation_duration="10"
+            app:shine_animation_duration="1000"
+            app:shine_count="10"
+            app:shine_turn_angle="40"
+            app:siShape="@raw/heart"/>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

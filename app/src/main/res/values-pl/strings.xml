@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Mowa+</string>
-    <string name="tongue_twisters">Łamigłówka słowna</string>
+    <string name="tongue_twisters">Twistery język</string>
     <string name="settings">Ustawienia</string>
     <string name="rating">Oceń aplikację</string>
     <string name="favorites">Ulubione</string>
