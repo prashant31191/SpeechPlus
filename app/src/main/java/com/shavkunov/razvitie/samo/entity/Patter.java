@@ -2,12 +2,16 @@ package com.shavkunov.razvitie.samo.entity;
 
 public class Patter {
 
-    private long id;
+    private int id;
     private String imageUrl;
     private String title;
     private boolean isFavorite;
 
-    public long getId() {
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
         return id;
     }
 

@@ -19,6 +19,7 @@ public class SpeechBaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table " + SpeechTable.NAME + "(" +
                 " _id integer primary key autoincrement, " +
+                SpeechTable.Cols.ID + ", " +
                 SpeechTable.Cols.URL + ", " +
                 SpeechTable.Cols.TITLE + ", " +
                 SpeechTable.Cols.FAVORITE + ")"

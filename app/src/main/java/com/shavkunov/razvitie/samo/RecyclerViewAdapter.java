@@ -107,8 +107,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 speechHolder.favoriteButtonSpeech.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        PatterLab.getInstance(context).updatePatter(
-                                patter, speechHolder.favoriteButtonSpeech.isChecked());
+                        patter.setFavorite(speechHolder.favoriteButtonSpeech.isChecked());
+                        PatterLab.getInstance(context).updateFavorite(patter);
                     }
                 });
                 break;

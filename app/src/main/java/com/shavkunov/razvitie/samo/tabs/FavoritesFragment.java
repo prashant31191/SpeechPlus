@@ -1,9 +1,11 @@
 package com.shavkunov.razvitie.samo.tabs;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,8 +54,28 @@ public class FavoritesFragment extends Fragment {
     private void setRecyclerView() {
         favoritesRecyclerView.setItemAnimator(new SlideInLeftAnimator());
         favoritesRecyclerView.setNestedScrollingEnabled(false);
-        favoritesRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        favoritesRecyclerView.setLayoutManager(getLayoutManager(getSizeScreen()));
         favoritesRecyclerView.setAdapter(new FavoritesAdapter());
+    }
+
+    private RecyclerView.LayoutManager getLayoutManager(int sizeScreen) {
+        RecyclerView.LayoutManager lm;
+        switch (sizeScreen) {
+            case Configuration.SCREENLAYOUT_SIZE_XLARGE:
+                lm = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+                break;
+            case Configuration.SCREENLAYOUT_SIZE_NORMAL:
+            default:
+                lm = new LinearLayoutManager(getContext());
+                break;
+        }
+
+        return lm;
+    }
+
+    private int getSizeScreen() {
+        return getResources().getConfiguration().screenLayout &
+                Configuration.SCREENLAYOUT_SIZE_MASK;
     }
 
     @Override
@@ -100,8 +122,9 @@ public class FavoritesFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     if (patters.size() != 0) {
-                        patterLab.updatePatter(patters.get(holder.getAdapterPosition()),
-                                holder.favoriteButtonSpeech.isChecked());
+                        patters.get(holder.getAdapterPosition())
+                                .setFavorite(holder.favoriteButtonSpeech.isChecked());
+                        patterLab.updateFavorite(patters.get(holder.getAdapterPosition()));
                         patters.remove(holder.getAdapterPosition());
                         notifyItemRemoved(holder.getAdapterPosition());
                     }

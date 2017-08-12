@@ -69,6 +69,7 @@ public class PatterLab {
 
     private static ContentValues getContentValues(Patter patter) {
         ContentValues values = new ContentValues();
+        values.put(SpeechTable.Cols.ID, patter.getId());
         values.put(SpeechTable.Cols.URL, patter.getImageUrl());
         values.put(SpeechTable.Cols.TITLE, patter.getTitle());
         values.put(SpeechTable.Cols.FAVORITE, patter.isFavorite() ? 1 : 0);
@@ -80,12 +81,21 @@ public class PatterLab {
         database.insert(SpeechTable.NAME, null, values);
     }
 
-    public void updatePatter(Patter patter, boolean isFavorite) {
-        ContentValues values = getContentValues(patter);
-        values.put(SpeechTable.Cols.FAVORITE, isFavorite ? 1 : 0);
+    public void updateFavorite(Patter patter) {
+        ContentValues values = new ContentValues();
+        values.put(SpeechTable.Cols.FAVORITE, patter.isFavorite() ? 1 : 0);
         database.update(SpeechTable.NAME, values,
-                SpeechTable.Cols.TITLE + " = ?",
-                new String[]{patter.getTitle()});
+                "_id = ?",
+                new String[] {String.valueOf(patter.getId())});
+    }
+
+    public void updateUrlAndTitle(Patter patter) {
+        ContentValues values = new ContentValues();
+        values.put(SpeechTable.Cols.URL, patter.getImageUrl());
+        values.put(SpeechTable.Cols.TITLE, patter.getTitle());
+        database.update(SpeechTable.NAME, values,
+                "_id = ?",
+                new String[] {String.valueOf(patter.getId())});
     }
 
     private SpeechCursorWrapper queryPatters(String whereClause, String[] whereArgs) {

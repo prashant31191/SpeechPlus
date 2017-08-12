@@ -63,9 +63,8 @@ public class SpeechFragment extends Fragment {
         unbinder = ButterKnife.bind(this, view);
         patterLab = PatterLab.getInstance(getContext());
         patterTask = new PatterTask().execute();
-        addPatters(patterLab);
         setRecyclerView();
-
+        addPatters(patterLab);
         addNativeAds();
         return view;
     }
@@ -173,31 +172,67 @@ public class SpeechFragment extends Fragment {
         @Override
         protected void onPostExecute(Patter[] p) {
             List<Patter> oldVersion = patterLab.getList();
-            List<Patter> newVersion = new ArrayList<>();
+            List<Patter> addVersion = new ArrayList<>();
+            List<Patter> replaceVersion = new ArrayList<>();
 
             if (p != null) {
-                Collections.addAll(newVersion, p);
-            }
+                Collections.addAll(addVersion, p);
+                Collections.addAll(replaceVersion, p);
 
-            if (newVersion.size() != 0 && oldVersion.size() != 0) {
-                for (int i = 0; i < oldVersion.size(); i++) {
-                    for (int j = 0; j < newVersion.size(); j++) {
-                        if (oldVersion.get(i).getTitle().equals(
-                                newVersion.get(j).getTitle())) {
-                            newVersion.remove(j);
-                            break;
+                if (replaceVersion.size() != 0 && oldVersion.size() != 0) {
+                    for (int i = 0; i < oldVersion.size(); i++) {
+                        for (int j = 0; j < replaceVersion.size(); j++) {
+                            if ((oldVersion.get(i).getTitle().equals(
+                                    replaceVersion.get(j).getTitle())) &&
+                                    oldVersion.get(i).getImageUrl().equals(
+                                            replaceVersion.get(j).getImageUrl())) {
+                                replaceVersion.remove(j);
+                                break;
+                            }
                         }
                     }
                 }
-            }
 
-            if (newVersion.size() != 0) {
-                for (Patter patter : newVersion) {
-                    patterLab.addPatter(patter);
+                if (addVersion.size() != 0 && oldVersion.size() != 0) {
+                    editList(oldVersion, addVersion);
                 }
 
-                addPatters(patterLab);
-                adapter.notifyDataSetChanged();
+                if (addVersion.size() != 0 && replaceVersion.size() != 0) {
+                    editList(addVersion, replaceVersion);
+                }
+
+                if (addVersion.size() != 0) {
+                    for (Patter patter : addVersion) {
+                        patterLab.addPatter(patter);
+                    }
+
+                    updateListAndAdapter();
+                }
+
+                if (replaceVersion.size() != 0) {
+                    for (Patter patter : replaceVersion) {
+                        patterLab.updateUrlAndTitle(patter);
+                    }
+
+                    updateListAndAdapter();
+                }
+            }
+        }
+
+        private void updateListAndAdapter() {
+            listItems.clear();
+            addPatters(patterLab);
+            adapter.notifyDataSetChanged();
+        }
+
+        private void editList(List<Patter> listForView, List<Patter> listForRemove) {
+            for (int i = 0; i < listForView.size(); i++) {
+                for (int j = 0; j < listForRemove.size(); j++) {
+                    if (listForView.get(i).getId() ==
+                            listForRemove.get(j).getId()) {
+                        listForRemove.remove(j);
+                    }
+                }
             }
         }
     }

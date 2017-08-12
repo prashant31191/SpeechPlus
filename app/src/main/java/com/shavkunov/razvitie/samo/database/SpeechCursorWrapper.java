@@ -13,11 +13,13 @@ public class SpeechCursorWrapper extends CursorWrapper {
     }
 
     public Patter getPatter() {
+        int id = getInt(getColumnIndex(SpeechTable.Cols.ID));
         String url = getString(getColumnIndex(SpeechTable.Cols.URL));
         String title = getString(getColumnIndex(SpeechTable.Cols.TITLE));
         int isFavorite = getInt(getColumnIndex(SpeechTable.Cols.FAVORITE));
 
         Patter patter = new Patter();
+        patter.setId(id);
         patter.setImageUrl(url);
         patter.setTitle(title);
         patter.setFavorite(isFavorite != 0);
