@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.ads.NativeExpressAdView;
 import com.sackcentury.shinebuttonlib.ShineButton;
 import com.shavkunov.razvitie.samo.entity.Patter;
@@ -101,6 +102,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
                 Glide.with(speechHolder.itemView.getContext())
                         .load(patter.getImageUrl())
+                        .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                         .into(speechHolder.imageSpeech);
                 speechHolder.titleSpeech.setText(patter.getTitle());
                 speechHolder.favoriteButtonSpeech.setChecked(patter.isFavorite());
