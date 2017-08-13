@@ -23,24 +23,14 @@ import java.util.List;
 
 public class CardLab {
 
-    public static final int ITEMS_PER_AD = 40;
+    private static final int ITEMS_PER_AD = 40;
     private static final int ITEMS_INDEX = 6;
-
-    private static CardLab patterLab;
 
     private CardView adCardView;
     private SQLiteDatabase database;
     private FragmentActivity fragmentActivity;
 
-    public static CardLab getInstance(FragmentActivity fragmentActivity) {
-        if (patterLab == null) {
-            patterLab = new CardLab(fragmentActivity);
-        }
-
-        return patterLab;
-    }
-
-    private CardLab(FragmentActivity fragmentActivity) {
+    public CardLab(FragmentActivity fragmentActivity) {
         this.fragmentActivity = fragmentActivity;
         database = new SpeechBaseHelper(fragmentActivity)
                 .getWritableDatabase();
@@ -79,12 +69,15 @@ public class CardLab {
                     if (adCardView == null) {
                         adCardView = (CardView) fragmentActivity.findViewById(R.id.ad_card_view);
                     }
-                    final int adWidth = adCardView.getWidth() - adCardView.getPaddingLeft()
-                            - adCardView.getPaddingLeft();
-                    AdSize adSize = new AdSize((int) (adWidth / scale), 150);
-                    adView.setAdSize(adSize);
-                    adView.setAdUnitId(adId);
-                    adView.loadAd(new AdRequest.Builder().build());
+
+                    if (adCardView != null) {
+                        final int adWidth = adCardView.getWidth() - adCardView.getPaddingLeft()
+                                - adCardView.getPaddingRight();
+                        AdSize adSize = new AdSize((int) (adWidth / scale), 150);
+                        adView.setAdSize(adSize);
+                        adView.setAdUnitId(adId);
+                        adView.loadAd(new AdRequest.Builder().build());
+                    }
                 }
             }
         });

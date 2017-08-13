@@ -27,10 +27,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     private FragmentActivity fragmentActivity;
     private List<Object> listItems;
+    private CardLab cardLab;
 
     public RecyclerViewAdapter(FragmentActivity fragmentActivity, List<Object> listItems) {
         this.fragmentActivity = fragmentActivity;
         this.listItems = listItems;
+        cardLab = new CardLab(fragmentActivity);
     }
 
     public class SpeechHolder extends RecyclerView.ViewHolder {
@@ -109,7 +111,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     @Override
                     public void onClick(View v) {
                         patter.setFavorite(speechHolder.favoriteButtonSpeech.isChecked());
-                        CardLab.getInstance(fragmentActivity).updateFavorite(patter);
+                        cardLab.updateFavorite(patter);
                     }
                 });
                 break;

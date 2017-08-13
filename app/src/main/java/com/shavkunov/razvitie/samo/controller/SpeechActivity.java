@@ -1,4 +1,4 @@
-package com.shavkunov.razvitie.samo;
+package com.shavkunov.razvitie.samo.controller;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
+import com.shavkunov.razvitie.samo.R;
 import com.shavkunov.razvitie.samo.tabs.FavoritesFragment;
 import com.shavkunov.razvitie.samo.tabs.SettingsFragment;
 import com.shavkunov.razvitie.samo.tabs.SpeechFragment;

@@ -1,11 +1,8 @@
 package com.shavkunov.razvitie.samo.tabs;
 
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +28,7 @@ public class FavoritesFragment extends Fragment {
 
     private List<Patter> patters = new ArrayList<>();
 
-    private CardLab patterLab;
+    private CardLab cardLab;
     private Unbinder unbinder;
 
     @BindView(R.id.favorites_recycler)
@@ -46,8 +43,8 @@ public class FavoritesFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favorites, container, false);
         unbinder = ButterKnife.bind(this, view);
-        patterLab = CardLab.getInstance(getActivity());
-        patters = patterLab.getFavoriteList();
+        cardLab = new CardLab(getActivity());
+        patters = cardLab.getFavoriteList();
         setRecyclerView();
         return view;
     }
@@ -106,7 +103,7 @@ public class FavoritesFragment extends Fragment {
                     if (patters.size() != 0) {
                         patters.get(holder.getAdapterPosition())
                                 .setFavorite(holder.favoriteButtonSpeech.isChecked());
-                        patterLab.updateFavorite(patters.get(holder.getAdapterPosition()));
+                        cardLab.updateFavorite(patters.get(holder.getAdapterPosition()));
                         patters.remove(holder.getAdapterPosition());
                         notifyItemRemoved(holder.getAdapterPosition());
                     }

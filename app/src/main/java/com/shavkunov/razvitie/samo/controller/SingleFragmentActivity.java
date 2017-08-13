@@ -1,4 +1,4 @@
-package com.shavkunov.razvitie.samo;
+package com.shavkunov.razvitie.samo.controller;
 
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import com.google.android.gms.ads.MobileAds;
+import com.shavkunov.razvitie.samo.R;
 
 import butterknife.ButterKnife;
 

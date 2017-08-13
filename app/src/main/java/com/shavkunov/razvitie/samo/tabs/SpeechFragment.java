@@ -1,12 +1,9 @@
 package com.shavkunov.razvitie.samo.tabs;
 
-import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,7 +34,7 @@ public class SpeechFragment extends Fragment {
     private List<Object> listItems = new ArrayList<>();
 
     private Unbinder unbinder;
-    private CardLab patterLab;
+    private CardLab cardLab;
     private AsyncTask patterTask;
     private RecyclerView.Adapter adapter;
 
@@ -53,11 +50,11 @@ public class SpeechFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_speech, container, false);
         unbinder = ButterKnife.bind(this, view);
-        patterLab = CardLab.getInstance(getActivity());
+        cardLab = new CardLab(getActivity());
         patterTask = new PatterTask().execute();
         setRecyclerView();
-        addPatters(patterLab);
-        patterLab.addNativeAds(listItems, speechRecycler);
+        addPatters(cardLab);
+        cardLab.addNativeAds(listItems, speechRecycler);
         return view;
     }
 
@@ -77,9 +74,9 @@ public class SpeechFragment extends Fragment {
         patterTask.cancel(true);
     }
 
-    private void addPatters(CardLab patterLab) {
-        for (int i = 0; i < patterLab.getList().size(); i++) {
-            Patter patter = patterLab.getList().get(i);
+    private void addPatters(CardLab cardLab) {
+        for (int i = 0; i < cardLab.getList().size(); i++) {
+            Patter patter = cardLab.getList().get(i);
             listItems.add(patter);
         }
     }
@@ -103,7 +100,7 @@ public class SpeechFragment extends Fragment {
 
         @Override
         protected void onPostExecute(Patter[] p) {
-            List<Patter> oldVersion = patterLab.getList();
+            List<Patter> oldVersion = cardLab.getList();
             List<Patter> addVersion = new ArrayList<>();
             List<Patter> replaceVersion = new ArrayList<>();
 
@@ -137,7 +134,7 @@ public class SpeechFragment extends Fragment {
 
                 if (addVersion.size() != 0) {
                     for (Patter patter : addVersion) {
-                        patterLab.addPatter(patter);
+                        cardLab.addPatter(patter);
                     }
 
                     updateListAndAdapter();
@@ -145,7 +142,7 @@ public class SpeechFragment extends Fragment {
 
                 if (replaceVersion.size() != 0) {
                     for (Patter patter : replaceVersion) {
-                        patterLab.updateUrlAndTitle(patter);
+                        cardLab.updateUrlAndTitle(patter);
                     }
 
                     updateListAndAdapter();
@@ -155,7 +152,7 @@ public class SpeechFragment extends Fragment {
 
         private void updateListAndAdapter() {
             listItems.clear();
-            addPatters(patterLab);
+            addPatters(cardLab);
             adapter.notifyDataSetChanged();
         }
 
