@@ -15,8 +15,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.sackcentury.shinebuttonlib.ShineButton;
 import com.shavkunov.razvitie.samo.R;
+import com.shavkunov.razvitie.samo.SettingsLayoutManager;
 import com.shavkunov.razvitie.samo.entity.Patter;
-import com.shavkunov.razvitie.samo.entity.PatterLab;
+import com.shavkunov.razvitie.samo.entity.CardLab;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,7 @@ public class FavoritesFragment extends Fragment {
 
     private List<Patter> patters = new ArrayList<>();
 
-    private PatterLab patterLab;
+    private CardLab patterLab;
     private Unbinder unbinder;
 
     @BindView(R.id.favorites_recycler)
@@ -45,7 +46,7 @@ public class FavoritesFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favorites, container, false);
         unbinder = ButterKnife.bind(this, view);
-        patterLab = PatterLab.getInstance(getContext());
+        patterLab = CardLab.getInstance(getActivity());
         patters = patterLab.getFavoriteList();
         setRecyclerView();
         return view;
@@ -54,28 +55,9 @@ public class FavoritesFragment extends Fragment {
     private void setRecyclerView() {
         favoritesRecyclerView.setItemAnimator(new SlideInLeftAnimator());
         favoritesRecyclerView.setNestedScrollingEnabled(false);
-        favoritesRecyclerView.setLayoutManager(getLayoutManager(getSizeScreen()));
+        favoritesRecyclerView.setLayoutManager(SettingsLayoutManager
+                .getLayoutManager(getContext()));
         favoritesRecyclerView.setAdapter(new FavoritesAdapter());
-    }
-
-    private RecyclerView.LayoutManager getLayoutManager(int sizeScreen) {
-        RecyclerView.LayoutManager lm;
-        switch (sizeScreen) {
-            case Configuration.SCREENLAYOUT_SIZE_XLARGE:
-                lm = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-                break;
-            case Configuration.SCREENLAYOUT_SIZE_NORMAL:
-            default:
-                lm = new LinearLayoutManager(getContext());
-                break;
-        }
-
-        return lm;
-    }
-
-    private int getSizeScreen() {
-        return getResources().getConfiguration().screenLayout &
-                Configuration.SCREENLAYOUT_SIZE_MASK;
     }
 
     @Override

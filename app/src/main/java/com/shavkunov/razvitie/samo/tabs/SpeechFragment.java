@@ -1,13 +1,9 @@
 package com.shavkunov.razvitie.samo.tabs;
 
-import android.content.Context;
 import android.content.res.Configuration;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -16,13 +12,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.NativeExpressAdView;
 import com.shavkunov.razvitie.samo.R;
 import com.shavkunov.razvitie.samo.RecyclerViewAdapter;
+import com.shavkunov.razvitie.samo.SettingsLayoutManager;
 import com.shavkunov.razvitie.samo.entity.Patter;
-import com.shavkunov.razvitie.samo.entity.PatterLab;
+import com.shavkunov.razvitie.samo.entity.CardLab;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -39,13 +33,11 @@ import butterknife.Unbinder;
 public class SpeechFragment extends Fragment {
 
     private static final String TAG = "SpeechFragment";
-    public static final int ITEMS_PER_AD = 40;
-    private static final int ITEMS_INDEX = 6;
 
     private List<Object> listItems = new ArrayList<>();
 
     private Unbinder unbinder;
-    private PatterLab patterLab;
+    private CardLab patterLab;
     private AsyncTask patterTask;
     private RecyclerView.Adapter adapter;
 
@@ -61,40 +53,21 @@ public class SpeechFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_speech, container, false);
         unbinder = ButterKnife.bind(this, view);
-        patterLab = PatterLab.getInstance(getContext());
+        patterLab = CardLab.getInstance(getActivity());
         patterTask = new PatterTask().execute();
         setRecyclerView();
         addPatters(patterLab);
-        addNativeAds();
+        patterLab.addNativeAds(listItems, speechRecycler);
         return view;
     }
 
     private void setRecyclerView() {
         speechRecycler.setHasFixedSize(true);
         speechRecycler.setNestedScrollingEnabled(false);
-        speechRecycler.setLayoutManager(getLayoutManager(getSizeScreen()));
-        adapter = new RecyclerViewAdapter(getContext(), listItems);
+        speechRecycler.setLayoutManager(SettingsLayoutManager
+                .getLayoutManager(getContext()));
+        adapter = new RecyclerViewAdapter(getActivity(), listItems);
         speechRecycler.setAdapter(adapter);
-    }
-
-    private RecyclerView.LayoutManager getLayoutManager(int sizeScreen) {
-        RecyclerView.LayoutManager lm;
-        switch (sizeScreen) {
-            case Configuration.SCREENLAYOUT_SIZE_XLARGE:
-                lm = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-                break;
-            case Configuration.SCREENLAYOUT_SIZE_NORMAL:
-            default:
-                lm = new LinearLayoutManager(getContext());
-                break;
-        }
-
-        return lm;
-    }
-
-    private int getSizeScreen() {
-        return getResources().getConfiguration().screenLayout &
-                Configuration.SCREENLAYOUT_SIZE_MASK;
     }
 
     @Override
@@ -104,52 +77,11 @@ public class SpeechFragment extends Fragment {
         patterTask.cancel(true);
     }
 
-    private void addPatters(PatterLab patterLab) {
+    private void addPatters(CardLab patterLab) {
         for (int i = 0; i < patterLab.getList().size(); i++) {
             Patter patter = patterLab.getList().get(i);
             listItems.add(patter);
         }
-    }
-
-    private void addNativeAds() {
-        if (listItems.size() != 0 && isOnline()) {
-            for (int i = ITEMS_INDEX; i <= listItems.size(); i += ITEMS_PER_AD) {
-                final NativeExpressAdView adView = new NativeExpressAdView(getActivity());
-                listItems.add(i, adView);
-            }
-
-            setUpAndLoadNativeAds();
-        }
-    }
-
-    private boolean isOnline() {
-        ConnectivityManager cm =
-                (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
-        if (networkInfo != null && networkInfo.isConnectedOrConnecting()) {
-            return true;
-        }
-        return false;
-    }
-
-    private void setUpAndLoadNativeAds() {
-        speechRecycler.post(new Runnable() {
-            @Override
-            public void run() {
-                final float scale = getActivity().getResources().getDisplayMetrics().density;
-                for (int i = ITEMS_INDEX; i <= listItems.size(); i += ITEMS_PER_AD) {
-                    final NativeExpressAdView adView =
-                            (NativeExpressAdView) listItems.get(i);
-                    final CardView adCardView = (CardView) getActivity().findViewById(R.id.ad_card_view);
-                    final int adWidth = adCardView.getWidth() - adCardView.getPaddingLeft()
-                            - adCardView.getPaddingLeft();
-                    AdSize adSize = new AdSize((int) (adWidth / scale), 150);
-                    adView.setAdSize(adSize);
-                    adView.setAdUnitId(getString(R.string.ad_id));
-                    adView.loadAd(new AdRequest.Builder().build());
-                }
-            }
-        });
     }
 
     private class PatterTask extends AsyncTask<Void, Void, Patter[]> {
@@ -193,10 +125,12 @@ public class SpeechFragment extends Fragment {
                     }
                 }
 
+                // Проверяем, есть ли что добавить
                 if (addVersion.size() != 0 && oldVersion.size() != 0) {
                     editList(oldVersion, addVersion);
                 }
 
+                // Проверяем, есть ли в ReplaceVersion что либо из addVersion
                 if (addVersion.size() != 0 && replaceVersion.size() != 0) {
                     editList(addVersion, replaceVersion);
                 }

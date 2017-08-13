@@ -1,7 +1,6 @@
 package com.shavkunov.razvitie.samo;
 
-import android.app.Activity;
-import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.ads.NativeExpressAdView;
 import com.sackcentury.shinebuttonlib.ShineButton;
 import com.shavkunov.razvitie.samo.entity.Patter;
-import com.shavkunov.razvitie.samo.entity.PatterLab;
+import com.shavkunov.razvitie.samo.entity.CardLab;
 
 import java.util.List;
 
@@ -26,11 +25,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private static final int SPEECH_HOLDER = 0;
     private static final int AD_HOLDER = 1;
 
-    private Context context;
+    private FragmentActivity fragmentActivity;
     private List<Object> listItems;
 
-    public RecyclerViewAdapter(Context context, List<Object> listItems) {
-        this.context = context;
+    public RecyclerViewAdapter(FragmentActivity fragmentActivity, List<Object> listItems) {
+        this.fragmentActivity = fragmentActivity;
         this.listItems = listItems;
     }
 
@@ -48,7 +47,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         public SpeechHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            favoriteButtonSpeech.init((Activity) context);
+            favoriteButtonSpeech.init(fragmentActivity);
         }
     }
 
@@ -110,7 +109,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     @Override
                     public void onClick(View v) {
                         patter.setFavorite(speechHolder.favoriteButtonSpeech.isChecked());
-                        PatterLab.getInstance(context).updateFavorite(patter);
+                        CardLab.getInstance(fragmentActivity).updateFavorite(patter);
                     }
                 });
                 break;
