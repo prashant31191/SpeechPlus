@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.shavkunov.razvitie.samo.Constants;
 import com.shavkunov.razvitie.samo.R;
 import com.shavkunov.razvitie.samo.RecyclerViewAdapter;
 import com.shavkunov.razvitie.samo.SettingsLayoutManager;
@@ -86,7 +87,7 @@ public class SpeechFragment extends Fragment {
         @Override
         protected Patter[] doInBackground(Void... params) {
             try {
-                final String url = "https://speechapp-service.herokuapp.com/get";
+                final String url = Constants.Url.GET;
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
                 ResponseEntity<Patter[]> responseEntity = restTemplate.getForEntity(url, Patter[].class);

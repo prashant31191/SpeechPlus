@@ -21,10 +21,9 @@ import com.shavkunov.razvitie.samo.database.SpeechDbSchema.SpeechTable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CardLab {
+import static com.shavkunov.razvitie.samo.Constants.Admob.*;
 
-    private static final int ITEMS_PER_AD = 40;
-    private static final int ITEMS_INDEX = 6;
+public class CardLab {
 
     private CardView adCardView;
     private SQLiteDatabase database;
@@ -38,7 +37,7 @@ public class CardLab {
 
     public void addNativeAds(List<Object> listItems, RecyclerView recyclerView) {
         if (listItems.size() != 0 && isOnline()) {
-            for (int i = ITEMS_INDEX; i <= listItems.size(); i += ITEMS_PER_AD) {
+            for (int i = AD_START_INDEX; i <= listItems.size(); i += AD_PER) {
                 final NativeExpressAdView adView = new NativeExpressAdView(fragmentActivity);
                 listItems.add(i, adView);
             }
@@ -62,7 +61,7 @@ public class CardLab {
         speechRecycler.post(new Runnable() {
             @Override
             public void run() {
-                for (int i = ITEMS_INDEX; i <= listItems.size(); i += ITEMS_PER_AD) {
+                for (int i = AD_START_INDEX; i <= listItems.size(); i += AD_PER) {
                     final NativeExpressAdView adView =
                             (NativeExpressAdView) listItems.get(i);
 
@@ -73,7 +72,7 @@ public class CardLab {
                     if (adCardView != null) {
                         final int adWidth = adCardView.getWidth() - adCardView.getPaddingLeft()
                                 - adCardView.getPaddingRight();
-                        AdSize adSize = new AdSize((int) (adWidth / scale), 150);
+                        AdSize adSize = new AdSize((int) (adWidth / scale), AD_HEIGHT);
                         adView.setAdSize(adSize);
                         adView.setAdUnitId(adId);
                         adView.loadAd(new AdRequest.Builder().build());
