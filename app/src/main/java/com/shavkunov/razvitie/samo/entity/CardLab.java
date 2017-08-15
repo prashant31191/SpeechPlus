@@ -13,10 +13,10 @@ import android.support.v7.widget.RecyclerView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.NativeExpressAdView;
+import com.shavkunov.razvitie.samo.Constants.DbSchema;
 import com.shavkunov.razvitie.samo.R;
 import com.shavkunov.razvitie.samo.database.SpeechBaseHelper;
 import com.shavkunov.razvitie.samo.database.SpeechCursorWrapper;
-import com.shavkunov.razvitie.samo.database.SpeechDbSchema.SpeechTable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,7 +106,7 @@ public class CardLab {
         try {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
-                if (cursor.getInt(cursor.getColumnIndex(SpeechTable.Cols.FAVORITE)) == 1) {
+                if (cursor.getInt(cursor.getColumnIndex(DbSchema.Cols.FAVORITE)) == 1) {
                     list.add(cursor.getPatter());
                 }
                 cursor.moveToNext();
@@ -120,38 +120,38 @@ public class CardLab {
 
     private ContentValues getContentValues(Patter patter) {
         ContentValues values = new ContentValues();
-        values.put(SpeechTable.Cols.ID, patter.getId());
-        values.put(SpeechTable.Cols.URL, patter.getImageUrl());
-        values.put(SpeechTable.Cols.TITLE, patter.getTitle());
-        values.put(SpeechTable.Cols.FAVORITE, patter.isFavorite() ? 1 : 0);
+        values.put(DbSchema.Cols.ID, patter.getId());
+        values.put(DbSchema.Cols.URL, patter.getImageUrl());
+        values.put(DbSchema.Cols.TITLE, patter.getTitle());
+        values.put(DbSchema.Cols.FAVORITE, patter.isFavorite() ? 1 : 0);
         return values;
     }
 
     public void addPatter(Patter p) {
         ContentValues values = getContentValues(p);
-        database.insert(SpeechTable.NAME, null, values);
+        database.insert(DbSchema.NAME_RU, null, values);
     }
 
     public void updateFavorite(Patter patter) {
         ContentValues values = new ContentValues();
-        values.put(SpeechTable.Cols.FAVORITE, patter.isFavorite() ? 1 : 0);
-        database.update(SpeechTable.NAME, values,
+        values.put(DbSchema.Cols.FAVORITE, patter.isFavorite() ? 1 : 0);
+        database.update(DbSchema.NAME_RU, values,
                 "_id = ?",
                 new String[] {String.valueOf(patter.getId())});
     }
 
     public void updateUrlAndTitle(Patter patter) {
         ContentValues values = new ContentValues();
-        values.put(SpeechTable.Cols.URL, patter.getImageUrl());
-        values.put(SpeechTable.Cols.TITLE, patter.getTitle());
-        database.update(SpeechTable.NAME, values,
+        values.put(DbSchema.Cols.URL, patter.getImageUrl());
+        values.put(DbSchema.Cols.TITLE, patter.getTitle());
+        database.update(DbSchema.NAME_RU, values,
                 "_id = ?",
                 new String[] {String.valueOf(patter.getId())});
     }
 
     private SpeechCursorWrapper queryPatters(String whereClause, String[] whereArgs) {
         Cursor cursor = database.query(
-                SpeechTable.NAME,
+                DbSchema.NAME_RU,
                 null,
                 whereClause,
                 whereArgs,

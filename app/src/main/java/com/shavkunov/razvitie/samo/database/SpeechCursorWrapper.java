@@ -3,7 +3,7 @@ package com.shavkunov.razvitie.samo.database;
 import android.database.Cursor;
 import android.database.CursorWrapper;
 
-import com.shavkunov.razvitie.samo.database.SpeechDbSchema.SpeechTable;
+import com.shavkunov.razvitie.samo.Constants.DbSchema;
 import com.shavkunov.razvitie.samo.entity.Patter;
 
 public class SpeechCursorWrapper extends CursorWrapper {
@@ -13,10 +13,10 @@ public class SpeechCursorWrapper extends CursorWrapper {
     }
 
     public Patter getPatter() {
-        int id = getInt(getColumnIndex(SpeechTable.Cols.ID));
-        String url = getString(getColumnIndex(SpeechTable.Cols.URL));
-        String title = getString(getColumnIndex(SpeechTable.Cols.TITLE));
-        int isFavorite = getInt(getColumnIndex(SpeechTable.Cols.FAVORITE));
+        int id = getInt(getColumnIndex(DbSchema.Cols.ID));
+        String url = getString(getColumnIndex(DbSchema.Cols.URL));
+        String title = getString(getColumnIndex(DbSchema.Cols.TITLE));
+        int isFavorite = getInt(getColumnIndex(DbSchema.Cols.FAVORITE));
 
         Patter patter = new Patter();
         patter.setId(id);
