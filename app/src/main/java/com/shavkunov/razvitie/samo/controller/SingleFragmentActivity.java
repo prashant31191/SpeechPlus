@@ -16,9 +16,8 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
     protected abstract Fragment createFragment();
 
     protected void replaceFragment() {
-        Fragment fragment = createFragment();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.fragment_container, fragment);
+        ft.replace(R.id.fragment_container, createFragment());
         ft.commit();
     }
 

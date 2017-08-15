@@ -9,4 +9,16 @@
     <!--AdMob-->
     <string name="ad_api">ca-app-pub-5111154896006563~3633948331</string>
     <string name="ad_id">ca-app-pub-5111154896006563/9312979281</string>
+
+    <string name="select_language">Выберите язык</string>
+    <string-array name="array_languages">
+        <item>Русский язык</item>
+        <item>Українська мова</item>
+        <item>Беларуская мова</item>
+        <item>Қазақ тілі</item>
+        <item>Türk dili</item>
+        <item>Język polski</item>
+        <item>Língua portuguesa</item>
+        <item>English language</item>
+    </string-array>
 </resources>

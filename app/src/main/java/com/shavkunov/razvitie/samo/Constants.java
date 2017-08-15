@@ -9,7 +9,6 @@ public class Constants {
     }
 
     public static class Url {
-        private static final String HOST = "https://speechapp-service.herokuapp.com/";
-        public static final String GET = HOST + "get";
+        public static final String GET = "https://api.myjson.com/bins/e8iw9";
     }
 }

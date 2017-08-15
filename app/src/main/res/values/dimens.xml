@@ -4,5 +4,6 @@
     <dimen name="card_corner_radius">6dp</dimen>
     <dimen name="title_size">22sp</dimen>
     <dimen name="title_text_margin">8dp</dimen>
+    <dimen name="spinner_margin">10dp</dimen>
     <dimen name="favorite_button_margin">10dp</dimen>
 </resources>
