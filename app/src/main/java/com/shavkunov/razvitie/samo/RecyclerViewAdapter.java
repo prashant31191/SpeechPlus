@@ -28,10 +28,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private FragmentActivity fragmentActivity;
     private List<Object> listItems;
     private CardLab cardLab;
+    private boolean isSwitch;
 
-    public RecyclerViewAdapter(FragmentActivity fragmentActivity, List<Object> listItems) {
+    public RecyclerViewAdapter(FragmentActivity fragmentActivity, List<Object> listItems,
+                               boolean isSwitch) {
         this.fragmentActivity = fragmentActivity;
         this.listItems = listItems;
+        this.isSwitch = isSwitch;
         cardLab = new CardLab(fragmentActivity);
     }
 
@@ -110,8 +113,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 speechHolder.favoriteButtonSpeech.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        patter.setFavorite(speechHolder.favoriteButtonSpeech.isChecked());
-                        cardLab.updateFavorite(patter);
+                        setFavoriteButton(isSwitch, speechHolder, patter);
                     }
                 });
                 break;
@@ -133,5 +135,22 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 adCardView.addView(adView);
                 break;
         }
+    }
+
+    private void setFavoriteButton(boolean isSwitch, SpeechHolder holder, Patter patter) {
+        if (isSwitch) {
+            if (listItems.size() != 0) {
+                updateFavoriteButton(holder, patter);
+                listItems.remove(holder.getAdapterPosition());
+                notifyItemRemoved(holder.getAdapterPosition());
+            }
+        } else {
+            updateFavoriteButton(holder, patter);
+        }
+    }
+
+    private void updateFavoriteButton(SpeechHolder holder, Patter patter) {
+        patter.setFavorite(holder.favoriteButtonSpeech.isChecked());
+        cardLab.updateFavorite(patter);
     }
 }

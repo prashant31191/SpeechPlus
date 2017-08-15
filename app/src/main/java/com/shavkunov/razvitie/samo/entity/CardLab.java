@@ -118,7 +118,7 @@ public class CardLab {
         return list;
     }
 
-    private static ContentValues getContentValues(Patter patter) {
+    private ContentValues getContentValues(Patter patter) {
         ContentValues values = new ContentValues();
         values.put(SpeechTable.Cols.ID, patter.getId());
         values.put(SpeechTable.Cols.URL, patter.getImageUrl());

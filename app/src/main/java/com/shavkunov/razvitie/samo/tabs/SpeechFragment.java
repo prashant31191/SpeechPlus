@@ -51,6 +51,7 @@ public class SpeechFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_speech, container, false);
         unbinder = ButterKnife.bind(this, view);
+
         cardLab = new CardLab(getActivity());
         patterTask = new PatterTask().execute();
         setRecyclerView();
@@ -64,7 +65,7 @@ public class SpeechFragment extends Fragment {
         speechRecycler.setNestedScrollingEnabled(false);
         speechRecycler.setLayoutManager(SettingsLayoutManager
                 .getLayoutManager(getContext()));
-        adapter = new RecyclerViewAdapter(getActivity(), listItems);
+        adapter = new RecyclerViewAdapter(getActivity(), listItems, false);
         speechRecycler.setAdapter(adapter);
     }
 
