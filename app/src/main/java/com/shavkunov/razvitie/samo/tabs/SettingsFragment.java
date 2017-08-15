@@ -1,10 +1,13 @@
 package com.shavkunov.razvitie.samo.tabs;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -12,8 +15,11 @@ import android.widget.Spinner;
 import com.bumptech.glide.Glide;
 import com.shavkunov.razvitie.samo.R;
 
+import java.util.Locale;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnItemSelected;
 import butterknife.Unbinder;
 
 public class SettingsFragment extends Fragment {
@@ -22,7 +28,14 @@ public class SettingsFragment extends Fragment {
         return new SettingsFragment();
     }
 
+    private static final String KEY_ITEM_SELECT = "select";
+    private static final String KEY_IS_ONE_CLICK = "oneClick";
+
+    private boolean isOneClick;
+    private int positionItem;
+
     private Unbinder unbinder;
+    private SharedPreferences preferences;
 
     @BindView(R.id.image_languages)
     ImageView imageLanguages;
@@ -35,7 +48,9 @@ public class SettingsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
         unbinder = ButterKnife.bind(this, view);
+        preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
 
+        getPreferences();
         editImage();
         editSpinner();
         return view;
@@ -52,6 +67,52 @@ public class SettingsFragment extends Fragment {
                 android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerLanguages.setAdapter(adapter);
+        spinnerLanguages.setSelection(positionItem);
+    }
+
+    @OnItemSelected(R.id.spinner_languages)
+    public void onItemSelected(AdapterView<?> parent, View itemSelected,
+                               int selectedItemPosition, long selectedId) {
+        if (!isOneClick) {
+            isOneClick = true;
+            String currentLanguage = Locale.getDefault().getLanguage();
+            switch (currentLanguage) {
+                case "ru":
+                    setPositionItem(0);
+                    break;
+                case "uk":
+                    setPositionItem(1);
+                    break;
+                case "be":
+                    setPositionItem(2);
+                    break;
+                case "kk":
+                    setPositionItem(3);
+                    break;
+                case "tr":
+                    setPositionItem(4);
+                    break;
+                case "pl":
+                    setPositionItem(5);
+                    break;
+                case "pt":
+                    setPositionItem(6);
+                    break;
+                case "en":
+                    setPositionItem(7);
+                    break;
+            }
+
+            spinnerLanguages.setSelection(positionItem);
+        } else {
+            setPositionItem(selectedItemPosition);
+        }
+
+        putPreferences();
+    }
+
+    private void setPositionItem(int selectedItemPosition) {
+        positionItem = selectedItemPosition;
     }
 
     @Override
@@ -59,5 +120,15 @@ public class SettingsFragment extends Fragment {
         super.onDestroyView();
         unbinder.unbind();
         Glide.get(getContext()).clearMemory();
+    }
+
+    private void getPreferences() {
+        positionItem = preferences.getInt(KEY_ITEM_SELECT, 0);
+        isOneClick = preferences.getBoolean(KEY_IS_ONE_CLICK, false);
+    }
+
+    private void putPreferences() {
+        preferences.edit().putBoolean(KEY_IS_ONE_CLICK, isOneClick).apply();
+        preferences.edit().putInt(KEY_ITEM_SELECT, positionItem).apply();
     }
 }
