@@ -90,7 +90,7 @@ public class SpeechFragment extends Fragment {
         @Override
         protected Patter[] doInBackground(Void... params) {
             try {
-                final String url = Constants.Url.GET;
+                final String url = cardLab.getUrlLink();
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
                 ResponseEntity<Patter[]> responseEntity = restTemplate.getForEntity(url, Patter[].class);

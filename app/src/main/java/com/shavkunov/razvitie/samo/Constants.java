@@ -9,7 +9,14 @@ public class Constants {
     }
 
     public static class Url {
-        public static final String GET = "https://api.myjson.com/bins/e8iw9";
+        public static final String RU = "https://api.myjson.com/bins/17rn9t";
+        public static final String UK = "https://api.myjson.com/bins/p6phd";
+        public static final String BE = "https://api.myjson.com/bins/jtt1d";
+        public static final String KK = "https://api.myjson.com/bins/egwld";
+        public static final String TR = "https://api.myjson.com/bins/9405d";
+        public static final String PL = "https://api.myjson.com/bins/xiry9";
+        public static final String PT = "https://api.myjson.com/bins/m7jgh";
+        public static final String EN = "https://api.myjson.com/bins/bhqkh";
     }
 
     public static final class DbSchema {

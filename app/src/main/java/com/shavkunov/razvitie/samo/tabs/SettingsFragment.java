@@ -28,11 +28,13 @@ public class SettingsFragment extends Fragment {
         return new SettingsFragment();
     }
 
-    private static final String KEY_ITEM_SELECT = "select";
-    private static final String KEY_IS_ONE_CLICK = "oneClick";
+    public static final String KEY_ITEM_SELECT = "select";
+    public static final String KEY_IS_ONE_CLICK = "oneClick";
+    public static final String KEY_CURRENT_LANGUAGE = "language";
 
     private boolean isOneClick;
     private int positionItem;
+    private String currentLanguage;
 
     private Unbinder unbinder;
     private SharedPreferences preferences;
@@ -49,7 +51,6 @@ public class SettingsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
         unbinder = ButterKnife.bind(this, view);
         preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-
         getPreferences();
         editImage();
         editSpinner();
@@ -75,7 +76,7 @@ public class SettingsFragment extends Fragment {
                                int selectedItemPosition, long selectedId) {
         if (!isOneClick) {
             isOneClick = true;
-            String currentLanguage = Locale.getDefault().getLanguage();
+            currentLanguage = Locale.getDefault().getLanguage();
             switch (currentLanguage) {
                 case "ru":
                     setPositionItem(0);
@@ -113,6 +114,33 @@ public class SettingsFragment extends Fragment {
 
     private void setPositionItem(int selectedItemPosition) {
         positionItem = selectedItemPosition;
+
+        switch (selectedItemPosition) {
+            case 0:
+                currentLanguage = "ru";
+                break;
+            case 1:
+                currentLanguage = "uk";
+                break;
+            case 2:
+                currentLanguage = "be";
+                break;
+            case 3:
+                currentLanguage = "kk";
+                break;
+            case 4:
+                currentLanguage = "tr";
+                break;
+            case 5:
+                currentLanguage = "pl";
+                break;
+            case 6:
+                currentLanguage = "pt";
+                break;
+            case 7:
+                currentLanguage = "en";
+                break;
+        }
     }
 
     @Override
@@ -125,10 +153,12 @@ public class SettingsFragment extends Fragment {
     private void getPreferences() {
         positionItem = preferences.getInt(KEY_ITEM_SELECT, 0);
         isOneClick = preferences.getBoolean(KEY_IS_ONE_CLICK, false);
+        currentLanguage = preferences.getString(KEY_CURRENT_LANGUAGE, "");
     }
 
     private void putPreferences() {
         preferences.edit().putBoolean(KEY_IS_ONE_CLICK, isOneClick).apply();
         preferences.edit().putInt(KEY_ITEM_SELECT, positionItem).apply();
+        preferences.edit().putString(KEY_CURRENT_LANGUAGE, currentLanguage).apply();
     }
 }

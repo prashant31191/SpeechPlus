@@ -2,10 +2,12 @@ package com.shavkunov.razvitie.samo.entity;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -13,26 +15,34 @@ import android.support.v7.widget.RecyclerView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.NativeExpressAdView;
+import com.shavkunov.razvitie.samo.Constants;
 import com.shavkunov.razvitie.samo.Constants.DbSchema;
+import com.shavkunov.razvitie.samo.Constants.Url;
 import com.shavkunov.razvitie.samo.R;
 import com.shavkunov.razvitie.samo.database.SpeechBaseHelper;
 import com.shavkunov.razvitie.samo.database.SpeechCursorWrapper;
+import com.shavkunov.razvitie.samo.tabs.SettingsFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import static com.shavkunov.razvitie.samo.Constants.Admob.*;
 
 public class CardLab {
 
+    private String tableForDb;
+
     private CardView adCardView;
     private SQLiteDatabase database;
     private FragmentActivity fragmentActivity;
+    private SharedPreferences preferences;
 
     public CardLab(FragmentActivity fragmentActivity) {
         this.fragmentActivity = fragmentActivity;
         database = new SpeechBaseHelper(fragmentActivity)
                 .getWritableDatabase();
+        preferences = PreferenceManager.getDefaultSharedPreferences(fragmentActivity);
     }
 
     public void addNativeAds(List<Object> listItems, RecyclerView recyclerView) {
@@ -129,13 +139,13 @@ public class CardLab {
 
     public void addPatter(Patter p) {
         ContentValues values = getContentValues(p);
-        database.insert(DbSchema.NAME_RU, null, values);
+        database.insert(getTableForDb(), null, values);
     }
 
     public void updateFavorite(Patter patter) {
         ContentValues values = new ContentValues();
         values.put(DbSchema.Cols.FAVORITE, patter.isFavorite() ? 1 : 0);
-        database.update(DbSchema.NAME_RU, values,
+        database.update(getTableForDb(), values,
                 "_id = ?",
                 new String[] {String.valueOf(patter.getId())});
     }
@@ -144,14 +154,14 @@ public class CardLab {
         ContentValues values = new ContentValues();
         values.put(DbSchema.Cols.URL, patter.getImageUrl());
         values.put(DbSchema.Cols.TITLE, patter.getTitle());
-        database.update(DbSchema.NAME_RU, values,
+        database.update(getTableForDb(), values,
                 "_id = ?",
                 new String[] {String.valueOf(patter.getId())});
     }
 
     private SpeechCursorWrapper queryPatters(String whereClause, String[] whereArgs) {
         Cursor cursor = database.query(
-                DbSchema.NAME_RU,
+                getTableForDb(),
                 null,
                 whereClause,
                 whereArgs,
@@ -161,5 +171,71 @@ public class CardLab {
         );
 
         return new SpeechCursorWrapper(cursor);
+    }
+
+    public String getTableForDb() {
+        boolean isOneClick = preferences.getBoolean(SettingsFragment.KEY_IS_ONE_CLICK, false);
+        String currentLanguage = preferences.getString(SettingsFragment.KEY_CURRENT_LANGUAGE,
+                Locale.getDefault().getLanguage());
+
+        if (!isOneClick) {
+            checkTable(currentLanguage);
+            return tableForDb;
+        } else {
+            checkTable(currentLanguage);
+            return tableForDb;
+        }
+    }
+
+    private void checkTable(String currentLanguage) {
+        switch (currentLanguage) {
+            case "ru":
+                tableForDb = DbSchema.NAME_RU;
+                break;
+            case "uk":
+                tableForDb = DbSchema.NAME_UK;
+                break;
+            case "be":
+                tableForDb = DbSchema.NAME_BE;
+                break;
+            case "kk":
+                tableForDb = DbSchema.NAME_KK;
+                break;
+            case "tr":
+                tableForDb = DbSchema.NAME_TR;
+                break;
+            case "pl":
+                tableForDb = DbSchema.NAME_PL;
+                break;
+            case "pt":
+                tableForDb = DbSchema.NAME_PT;
+                break;
+            case "en":
+                tableForDb = DbSchema.NAME_EN;
+                break;
+        }
+    }
+
+    public String getUrlLink() {
+        switch (getTableForDb()) {
+            case "ru":
+                return Url.RU;
+            case "uk":
+                return Url.UK;
+            case "be":
+                return Url.BE;
+            case "kk":
+                return Url.KK;
+            case "tr":
+                return Url.TR;
+            case "pl":
+                return Url.PL;
+            case "pt":
+                return Url.PT;
+            case "en":
+                return Url.EN;
+        }
+
+        return "";
     }
 }
