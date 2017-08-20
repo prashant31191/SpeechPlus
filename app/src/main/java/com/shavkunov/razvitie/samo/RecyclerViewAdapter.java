@@ -1,8 +1,5 @@
 package com.shavkunov.razvitie.samo;
 
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -143,8 +140,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     private void setFavoriteButton(boolean isSwitch, SpeechHolder holder, Patter patter) {
         if (isSwitch) {
+            updateFavoriteButton(holder, patter);
+
             if (listItems.size() != 0) {
-                updateFavoriteButton(holder, patter);
                 listItems.remove(holder.getAdapterPosition());
                 notifyItemRemoved(holder.getAdapterPosition());
             }

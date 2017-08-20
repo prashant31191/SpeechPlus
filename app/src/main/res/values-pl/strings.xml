@@ -10,4 +10,15 @@
     <string name="rating">Oceń aplikację</string>
     <string name="favorites">Ulubione</string>
     <string name="select_language">Wybierz język</string>
+
+    <string-array name="array_languages">
+        <item>Русский язык</item>
+        <item>Українська мова</item>
+        <item>Беларуская мова</item>
+        <item>Қазақ тілі</item>
+        <item>Türk dili</item>
+        <item>Język polski</item>
+        <item>Língua portuguesa</item>
+        <item>English language</item>
+    </string-array>
 </resources>
