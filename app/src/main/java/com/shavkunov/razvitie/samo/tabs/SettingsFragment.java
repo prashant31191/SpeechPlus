@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.bumptech.glide.Glide;
+import com.shavkunov.razvitie.samo.Constants;
+import com.shavkunov.razvitie.samo.Constants.DbSchema;
 import com.shavkunov.razvitie.samo.R;
 
 import java.util.Locale;
@@ -78,28 +80,29 @@ public class SettingsFragment extends Fragment {
             isOneClick = true;
             currentLanguage = Locale.getDefault().getLanguage();
             switch (currentLanguage) {
-                case "ru":
+                case DbSchema.NAME_RU:
                     setPositionItem(0);
                     break;
-                case "uk":
+                case DbSchema.NAME_UK:
                     setPositionItem(1);
                     break;
-                case "be":
+                case DbSchema.NAME_BE:
                     setPositionItem(2);
                     break;
-                case "kk":
+                case DbSchema.NAME_KK:
                     setPositionItem(3);
                     break;
-                case "tr":
+                case DbSchema.NAME_TR:
                     setPositionItem(4);
                     break;
-                case "pl":
+                case DbSchema.NAME_PL:
                     setPositionItem(5);
                     break;
-                case "pt":
+                case DbSchema.NAME_PT:
                     setPositionItem(6);
                     break;
-                case "en":
+                case DbSchema.NAME_EN:
+                default:
                     setPositionItem(7);
                     break;
             }
@@ -117,28 +120,29 @@ public class SettingsFragment extends Fragment {
 
         switch (selectedItemPosition) {
             case 0:
-                currentLanguage = "ru";
+                currentLanguage = DbSchema.NAME_RU;
                 break;
             case 1:
-                currentLanguage = "uk";
+                currentLanguage = DbSchema.NAME_UK;
                 break;
             case 2:
-                currentLanguage = "be";
+                currentLanguage = DbSchema.NAME_BE;
                 break;
             case 3:
-                currentLanguage = "kk";
+                currentLanguage = DbSchema.NAME_KK;
                 break;
             case 4:
-                currentLanguage = "tr";
+                currentLanguage = DbSchema.NAME_TR;
                 break;
             case 5:
-                currentLanguage = "pl";
+                currentLanguage = DbSchema.NAME_PL;
                 break;
             case 6:
-                currentLanguage = "pt";
+                currentLanguage = DbSchema.NAME_PT;
                 break;
             case 7:
-                currentLanguage = "en";
+            default:
+                currentLanguage = DbSchema.NAME_EN;
                 break;
         }
     }

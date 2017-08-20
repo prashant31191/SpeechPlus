@@ -147,7 +147,7 @@ public class CardLab {
         values.put(DbSchema.Cols.FAVORITE, patter.isFavorite() ? 1 : 0);
         database.update(getTableForDb(), values,
                 "_id = ?",
-                new String[] {String.valueOf(patter.getId())});
+                new String[]{String.valueOf(patter.getId())});
     }
 
     public void updateUrlAndTitle(Patter patter) {
@@ -156,7 +156,7 @@ public class CardLab {
         values.put(DbSchema.Cols.TITLE, patter.getTitle());
         database.update(getTableForDb(), values,
                 "_id = ?",
-                new String[] {String.valueOf(patter.getId())});
+                new String[]{String.valueOf(patter.getId())});
     }
 
     private SpeechCursorWrapper queryPatters(String whereClause, String[] whereArgs) {
@@ -189,28 +189,29 @@ public class CardLab {
 
     private void checkTable(String currentLanguage) {
         switch (currentLanguage) {
-            case "ru":
+            case DbSchema.NAME_RU:
                 tableForDb = DbSchema.NAME_RU;
                 break;
-            case "uk":
+            case DbSchema.NAME_UK:
                 tableForDb = DbSchema.NAME_UK;
                 break;
-            case "be":
+            case DbSchema.NAME_BE:
                 tableForDb = DbSchema.NAME_BE;
                 break;
-            case "kk":
+            case DbSchema.NAME_KK:
                 tableForDb = DbSchema.NAME_KK;
                 break;
-            case "tr":
+            case DbSchema.NAME_TR:
                 tableForDb = DbSchema.NAME_TR;
                 break;
-            case "pl":
+            case DbSchema.NAME_PL:
                 tableForDb = DbSchema.NAME_PL;
                 break;
-            case "pt":
+            case DbSchema.NAME_PT:
                 tableForDb = DbSchema.NAME_PT;
                 break;
-            case "en":
+            case DbSchema.NAME_EN:
+            default:
                 tableForDb = DbSchema.NAME_EN;
                 break;
         }
@@ -218,24 +219,23 @@ public class CardLab {
 
     public String getUrlLink() {
         switch (getTableForDb()) {
-            case "ru":
+            case DbSchema.NAME_RU:
                 return Url.RU;
-            case "uk":
+            case DbSchema.NAME_UK:
                 return Url.UK;
-            case "be":
+            case DbSchema.NAME_BE:
                 return Url.BE;
-            case "kk":
+            case DbSchema.NAME_KK:
                 return Url.KK;
-            case "tr":
+            case DbSchema.NAME_TR:
                 return Url.TR;
-            case "pl":
+            case DbSchema.NAME_PL:
                 return Url.PL;
-            case "pt":
+            case DbSchema.NAME_PT:
                 return Url.PT;
-            case "en":
+            case DbSchema.NAME_EN:
+            default:
                 return Url.EN;
         }
-
-        return "";
     }
 }
