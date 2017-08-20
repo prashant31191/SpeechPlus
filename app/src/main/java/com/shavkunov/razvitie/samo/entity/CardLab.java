@@ -81,7 +81,7 @@ public class CardLab {
 
                     if (adCardView != null) {
                         final int adWidth = adCardView.getWidth() - adCardView.getPaddingLeft()
-                                - adCardView.getPaddingRight();
+                                - adCardView.getPaddingRight() - 20;
                         AdSize adSize = new AdSize((int) (adWidth / scale), AD_HEIGHT);
                         adView.setAdSize(adSize);
                         adView.setAdUnitId(adId);
