@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--AdMob-->
+    <string name="ad_api">ca-app-pub-5111154896006563~3633948331</string>
+    <string name="ad_id">ca-app-pub-5111154896006563/9312979281</string>
+
     <string name="app_name">Speech+</string>
     <string name="favorites">Favorites</string>
     <string name="rating">Rate this App</string>
     <string name="settings">Settings</string>
     <string name="tongue_twisters">Tongue Twisters</string>
-
-    <!--AdMob-->
-    <string name="ad_api">ca-app-pub-5111154896006563~3633948331</string>
-    <string name="ad_id">ca-app-pub-5111154896006563/9312979281</string>
     <string name="select_language">Choose language</string>
 </resources>

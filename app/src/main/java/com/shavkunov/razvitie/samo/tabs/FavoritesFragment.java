@@ -57,7 +57,6 @@ public class FavoritesFragment extends Fragment {
 
     private void setRecyclerView() {
         favoritesRecyclerView.setItemAnimator(new SlideInLeftAnimator());
-        favoritesRecyclerView.setNestedScrollingEnabled(false);
         favoritesRecyclerView.setLayoutManager(SettingsLayoutManager
                 .getLayoutManager(getContext()));
         favoritesRecyclerView.setAdapter(new RecyclerViewAdapter(getActivity(), listItems, true));

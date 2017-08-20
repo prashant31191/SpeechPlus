@@ -1,5 +1,8 @@
 package com.shavkunov.razvitie.samo;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -106,7 +109,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
                 Glide.with(speechHolder.itemView.getContext())
                         .load(patter.getImageUrl())
-                        .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .crossFade()
                         .into(speechHolder.imageSpeech);
                 speechHolder.titleSpeech.setText(patter.getTitle());
                 speechHolder.favoriteButtonSpeech.setChecked(patter.isFavorite());

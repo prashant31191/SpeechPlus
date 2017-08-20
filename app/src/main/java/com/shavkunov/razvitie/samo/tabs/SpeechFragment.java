@@ -62,8 +62,6 @@ public class SpeechFragment extends Fragment {
     }
 
     private void setRecyclerView() {
-        speechRecycler.setHasFixedSize(true);
-        speechRecycler.setNestedScrollingEnabled(false);
         speechRecycler.setLayoutManager(SettingsLayoutManager
                 .getLayoutManager(getContext()));
         adapter = new RecyclerViewAdapter(getActivity(), listItems, false);
