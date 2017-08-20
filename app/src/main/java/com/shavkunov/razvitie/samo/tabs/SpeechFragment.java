@@ -73,7 +73,6 @@ public class SpeechFragment extends Fragment {
         super.onDestroyView();
         unbinder.unbind();
         patterTask.cancel(true);
-        Glide.get(getContext()).clearMemory();
     }
 
     private void addPatters(CardLab cardLab) {

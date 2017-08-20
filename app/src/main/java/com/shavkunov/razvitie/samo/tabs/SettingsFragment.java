@@ -151,7 +151,6 @@ public class SettingsFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
-        Glide.get(getContext()).clearMemory();
     }
 
     private void getPreferences() {
