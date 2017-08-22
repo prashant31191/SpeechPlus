@@ -2,6 +2,7 @@ package com.shavkunov.razvitie.samo;
 
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     private static final int SPEECH_HOLDER = 0;
     private static final int AD_HOLDER = 1;
+    private static final String TAG = "tag";
 
     private FragmentActivity fragmentActivity;
     private List<Object> listItems;
@@ -147,9 +149,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         if (isSwitch) {
             updateFavoriteButton(holder, patter);
 
-            if (listItems.size() != 0) {
+            try {
                 listItems.remove(holder.getAdapterPosition());
                 notifyItemRemoved(holder.getAdapterPosition());
+            } catch (ArrayIndexOutOfBoundsException e) {
+                Log.e(TAG, "The exception was caught");
             }
         } else {
             updateFavoriteButton(holder, patter);
