@@ -9,7 +9,7 @@ public class Constants {
     }
 
     public static class Url {
-        public static final String RU = "https://api.myjson.com/bins/19fdt9";
+        public static final String RU = "https://api.myjson.com/bins/1g835d";
         public static final String UK = "https://api.myjson.com/bins/19bo8x";
         public static final String BE = "https://api.myjson.com/bins/1ag5t5";
         public static final String KK = "https://api.myjson.com/bins/c61kh";
