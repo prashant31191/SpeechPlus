@@ -7,7 +7,7 @@ android {
         applicationId "com.shavkunov.razvitie.samo"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 66
+        versionCode 67
         versionName "4.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -48,4 +48,5 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-databind:2.3.2'
     compile 'jp.wasabeef:recyclerview-animators:2.2.7'
     compile 'com.google.android.gms:play-services-ads:11.0.4'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 }
