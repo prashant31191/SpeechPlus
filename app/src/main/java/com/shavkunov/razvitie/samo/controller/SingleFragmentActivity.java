@@ -5,18 +5,13 @@ import android.support.annotation.LayoutRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 
 import com.google.android.gms.ads.MobileAds;
 import com.shavkunov.razvitie.samo.R;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public abstract class SingleFragmentActivity extends AppCompatActivity {
-
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
 
     protected abstract Fragment createFragment();
 
@@ -30,7 +25,9 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
      * Переопределить, если необходимо установить слушателя для Navigation Bar Bottom
      * Override, if you need to set the listener for Navigation Bar Bottom
      */
-    protected void setBottomBar() {}
+    protected void setBottomBar() {
+        ButterKnife.bind(this);
+    }
 
     @LayoutRes
     protected int getLayoutResId() {
@@ -42,8 +39,6 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResId());
         MobileAds.initialize(this, getString(R.string.ad_api));
-        ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
 
         setBottomBar();
         replaceFragment();
