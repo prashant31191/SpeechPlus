@@ -110,6 +110,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 RequestOptions requestOptions = new RequestOptions();
                 requestOptions.diskCacheStrategy(DiskCacheStrategy.ALL);
                 requestOptions.centerCrop();
+                requestOptions.error(R.drawable.no_connection);
 
                 Glide.with(speechHolder.itemView.getContext())
                         .setDefaultRequestOptions(requestOptions)
