@@ -107,16 +107,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 final SpeechHolder speechHolder = (SpeechHolder) holder;
                 final Patter patter = (Patter) listItems.get(position);
 
-                RequestOptions requestOptions = new RequestOptions();
-                requestOptions.diskCacheStrategy(DiskCacheStrategy.ALL);
-                requestOptions.centerCrop();
-                requestOptions.error(R.drawable.no_connection);
-
-                Glide.with(speechHolder.itemView.getContext())
-                        .setDefaultRequestOptions(requestOptions)
-                        .load(patter.getImageUrl())
-                        .into(speechHolder.imageSpeech);
-
+                setImageView(speechHolder, patter);
                 speechHolder.titleSpeech.setText(patter.getTitle());
                 speechHolder.favoriteButtonSpeech.setChecked(patter.isFavorite());
                 speechHolder.favoriteButtonSpeech.setOnClickListener(new View.OnClickListener() {
@@ -144,6 +135,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 adCardView.addView(adView);
                 break;
         }
+    }
+
+    private void setImageView(SpeechHolder speechHolder, Patter patter) {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.diskCacheStrategy(DiskCacheStrategy.ALL);
+        requestOptions.centerCrop();
+        requestOptions.error(R.drawable.no_connection);
+
+        Glide.with(speechHolder.itemView.getContext())
+                .setDefaultRequestOptions(requestOptions)
+                .load(patter.getImageUrl())
+                .into(speechHolder.imageSpeech);
     }
 
     private void setFavoriteButton(boolean isSwitch, SpeechHolder holder, Patter patter) {

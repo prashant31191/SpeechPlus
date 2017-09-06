@@ -5,9 +5,6 @@
     <string name="ad_id">ca-app-pub-5111154896006563/9312979281</string>
 
     <string name="app_name">Речь+</string>
-    <string name="tongue_twisters">Скороговорки</string>
-    <string name="favorites">Избранное</string>
-    <string name="settings">Настройки</string>
     <string name="rating">Оценить приложение</string>
     <string name="select_language">Выберите язык</string>
 

@@ -4,20 +4,23 @@
         activeColor="@color/colorAccent"
         icon="@drawable/home"
         id="@+id/tab_home"
-        inActiveColor="@color/colorBottomBarInActive"
-        title="@string/tongue_twisters"/>
+        inActiveColor="@color/colorBottomBarInActive"/>
 
     <tab
         activeColor="@color/colorAccent"
         icon="@drawable/heart"
         id="@+id/tab_favorites"
-        inActiveColor="@color/colorBottomBarInActive"
-        title="@string/favorites"/>
+        inActiveColor="@color/colorBottomBarInActive"/>
+
+    <tab
+        activeColor="@color/colorAccent"
+        icon="@drawable/archive"
+        id="@+id/tab_my_tongue"
+        inActiveColor="@color/colorBottomBarInActive"/>
 
     <tab
         activeColor="@color/colorAccent"
         icon="@drawable/settings"
         id="@+id/tab_settings"
-        inActiveColor="@color/colorBottomBarInActive"
-        title="@string/settings"/>
+        inActiveColor="@color/colorBottomBarInActive"/>
 </tabs>

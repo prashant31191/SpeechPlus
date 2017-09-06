@@ -29,6 +29,8 @@ public class Constants {
         public static final String NAME_PT = "pt";
         public static final String NAME_EN = "en";
 
+        public static final String MY_TWISTERS = "myTwisters";
+
         public static final class Cols {
             public static final String ID = "id";
             public static final String URL = "url";

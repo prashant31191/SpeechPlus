@@ -11,6 +11,7 @@ import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 import com.shavkunov.razvitie.samo.R;
 import com.shavkunov.razvitie.samo.tabs.FavoritesFragment;
+import com.shavkunov.razvitie.samo.tabs.MyTwistersFragment;
 import com.shavkunov.razvitie.samo.tabs.SettingsFragment;
 import com.shavkunov.razvitie.samo.tabs.SpeechFragment;
 
@@ -35,6 +36,9 @@ public class SpeechActivity extends SingleFragmentActivity {
                         break;
                     case R.id.tab_favorites:
                         fragment = FavoritesFragment.newInstance();
+                        break;
+                    case R.id.tab_my_tongue:
+                        fragment = MyTwistersFragment.newInstance();
                         break;
                     case R.id.tab_settings:
                         fragment = SettingsFragment.newInstance();
