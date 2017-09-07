@@ -67,9 +67,9 @@ public class MyTwistersFragment extends Fragment {
                 break;
         }
 
-            if (touchDown > touchUp) {
+            if (touchDown > touchUp && fabMyTwisters.getVisibility() == View.VISIBLE) {
                 fabMyTwisters.hide();
-            } else {
+            } else if (touchDown < touchUp && fabMyTwisters.getVisibility() != View.VISIBLE){
                 fabMyTwisters.show();
             }
         return false;

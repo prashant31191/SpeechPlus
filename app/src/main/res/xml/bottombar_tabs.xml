@@ -14,7 +14,7 @@
 
     <tab
         activeColor="@color/colorAccent"
-        icon="@drawable/archive"
+        icon="@drawable/copy"
         id="@+id/tab_my_tongue"
         inActiveColor="@color/colorBottomBarInActive"/>
 
