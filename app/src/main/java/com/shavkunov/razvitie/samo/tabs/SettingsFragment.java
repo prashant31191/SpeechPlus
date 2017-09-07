@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.bumptech.glide.Glide;
-import com.shavkunov.razvitie.samo.Constants;
 import com.shavkunov.razvitie.samo.Constants.DbSchema;
 import com.shavkunov.razvitie.samo.R;
 

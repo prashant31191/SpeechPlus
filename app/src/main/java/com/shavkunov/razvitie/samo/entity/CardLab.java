@@ -11,11 +11,11 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.NativeExpressAdView;
-import com.shavkunov.razvitie.samo.Constants;
 import com.shavkunov.razvitie.samo.Constants.DbSchema;
 import com.shavkunov.razvitie.samo.Constants.Url;
 import com.shavkunov.razvitie.samo.R;
@@ -30,6 +30,8 @@ import java.util.Locale;
 import static com.shavkunov.razvitie.samo.Constants.Admob.*;
 
 public class CardLab {
+
+    private static String TAG = "error";
 
     private String tableForDb;
 
@@ -79,13 +81,17 @@ public class CardLab {
                         adCardView = (CardView) fragmentActivity.findViewById(R.id.ad_card_view);
                     }
 
-                    if (adCardView != null) {
-                        final int adWidth = adCardView.getWidth() - adCardView.getPaddingLeft()
-                                - adCardView.getPaddingRight() - 20;
-                        AdSize adSize = new AdSize((int) (adWidth / scale), AD_HEIGHT);
-                        adView.setAdSize(adSize);
-                        adView.setAdUnitId(adId);
-                        adView.loadAd(new AdRequest.Builder().build());
+                    try {
+                        if (adCardView != null) {
+                            final int adWidth = adCardView.getWidth() - adCardView.getPaddingLeft()
+                                    - adCardView.getPaddingRight() - 20;
+                            AdSize adSize = new AdSize((int) (adWidth / scale), AD_HEIGHT);
+                            adView.setAdSize(adSize);
+                            adView.setAdUnitId(adId);
+                            adView.loadAd(new AdRequest.Builder().build());
+                        }
+                    } catch (IllegalArgumentException e) {
+                        Log.d(TAG, "IllegalArgumentException was caught");
                     }
                 }
             }

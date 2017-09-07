@@ -1,11 +1,11 @@
 package com.shavkunov.razvitie.samo.tabs;
 
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -22,15 +22,15 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnTouch;
 import butterknife.Unbinder;
 
 public class MyTwistersFragment extends Fragment {
 
     private List<Object> listItems = new ArrayList<>();
+    private float touchDown;
+    private float touchUp;
 
-    private SettingsTwisters settingsTwisters;
-
-    private CardLab cardLab;
     private Unbinder unbinder;
 
     @BindView(R.id.my_twisters_recycler)
@@ -48,29 +48,39 @@ public class MyTwistersFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_twisters, containter, false);
         unbinder = ButterKnife.bind(this, view);
-        cardLab = new CardLab(getActivity());
+        CardLab cardLab = new CardLab(getActivity());
         addPatters(cardLab);
         setRecyclerView();
         cardLab.addNativeAds(listItems, myTwistersRecycler);
+
         return view;
+    }
+
+    @OnTouch(R.id.my_twisters_recycler)
+    public boolean onTouchRecycler(MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                touchDown = event.getY();
+                break;
+            case MotionEvent.ACTION_UP:
+                touchUp = event.getY();
+                break;
+        }
+
+            if (touchDown > touchUp) {
+                fabMyTwisters.hide();
+            } else {
+                fabMyTwisters.show();
+            }
+        return false;
     }
 
     @OnClick(R.id.fab_my_twisters)
     public void onFabClick() {
-        settingsTwisters = SettingsTwisters.newInstance();
+        SettingsTwisters settingsTwisters = SettingsTwisters.newInstance();
         settingsTwisters.setParentFab(fabMyTwisters);
         settingsTwisters.show(getActivity().getSupportFragmentManager(),
                 settingsTwisters.getTag());
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        if (settingsTwisters.isAdded()) {
-            settingsTwisters.dismiss();
-            settingsTwisters.show(getActivity().getSupportFragmentManager(),
-                    settingsTwisters.getTag());
-        }
     }
 
     private void addPatters(CardLab cardLab) {
