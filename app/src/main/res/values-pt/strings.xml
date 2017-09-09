@@ -4,13 +4,6 @@
     <string name="ad_api">ca-app-pub-5111154896006563~3633948331</string>
     <string name="ad_id">ca-app-pub-5111154896006563/9312979281</string>
 
-    <string name="app_name">Discurso+</string>
-    <string name="favorites">Favoritos</string>
-    <string name="rating">Avaliar</string>
-    <string name="settings">Configurações</string>
-    <string name="tongue_twisters">Trava Línguas</string>
-    <string name="select_language">Selecione um Idioma</string>
-
     <string-array name="array_languages">
         <item>Русский язык</item>
         <item>Українська мова</item>
@@ -21,4 +14,10 @@
         <item>Língua portuguesa</item>
         <item>English language</item>
     </string-array>
+
+    <string name="app_name">Discurso+</string>
+    <string name="rating">Avaliar</string>
+    <string name="select_language">Selecione um Idioma</string>
+    <string name="save">Salvar</string>
+    <string name="hint_patter">Digite seu trava-língua</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.shavkunov.razvitie.samo.tabs;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -12,7 +13,7 @@ import android.view.ViewGroup;
 import com.shavkunov.razvitie.samo.R;
 import com.shavkunov.razvitie.samo.RecyclerViewAdapter;
 import com.shavkunov.razvitie.samo.SettingsLayoutManager;
-import com.shavkunov.razvitie.samo.SettingsTwisters;
+import com.shavkunov.razvitie.samo.controller.SettingsNewPatter;
 import com.shavkunov.razvitie.samo.entity.CardLab;
 import com.shavkunov.razvitie.samo.entity.Patter;
 
@@ -77,10 +78,8 @@ public class MyTwistersFragment extends Fragment {
 
     @OnClick(R.id.fab_my_twisters)
     public void onFabClick() {
-        SettingsTwisters settingsTwisters = SettingsTwisters.newInstance();
-        settingsTwisters.setParentFab(fabMyTwisters);
-        settingsTwisters.show(getActivity().getSupportFragmentManager(),
-                settingsTwisters.getTag());
+        Intent intent = new Intent(getActivity(), SettingsNewPatter.class);
+        startActivity(intent);
     }
 
     private void addPatters(CardLab cardLab) {

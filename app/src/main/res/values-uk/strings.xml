@@ -4,13 +4,6 @@
     <string name="ad_api">ca-app-pub-5111154896006563~3633948331</string>
     <string name="ad_id">ca-app-pub-5111154896006563/9312979281</string>
 
-    <string name="app_name">Мова+</string>
-    <string name="favorites">Вибране</string>
-    <string name="rating">Оцініть додаток</string>
-    <string name="settings">Налаштування</string>
-    <string name="tongue_twisters">Скоромовки</string>
-    <string name="select_language">Виберіть мову</string>
-
     <string-array name="array_languages">
         <item>Русский язык</item>
         <item>Українська мова</item>
@@ -21,4 +14,10 @@
         <item>Língua portuguesa</item>
         <item>English language</item>
     </string-array>
+
+    <string name="app_name">Мова+</string>
+    <string name="rating">Оцініть додаток</string>
+    <string name="select_language">Виберіть мову</string>
+    <string name="save">Зберегти</string>
+    <string name="hint_patter">Введіть скоромовку</string>
 </resources>

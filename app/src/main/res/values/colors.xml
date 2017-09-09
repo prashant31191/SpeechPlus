@@ -7,4 +7,5 @@
     <color name="colorFavoriteButton">#FF6666</color>
     <color name="colorFabButtonNormal">#FFF</color>
     <color name="colorFabButtonRipple">#dcdcdc</color>
+    <color name="colorEditText">#494949</color>
 </resources>
