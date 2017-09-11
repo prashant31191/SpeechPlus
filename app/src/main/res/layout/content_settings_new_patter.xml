@@ -40,7 +40,6 @@
                     android:layout_height="match_parent"
                     android:layout_margin="@dimen/new_patter_edit"
                     android:hint="@string/hint_patter"
-                    app:met_baseColor="@color/colorEditText"
                     app:met_floatingLabel="highlight"
                     app:met_singleLineEllipsis="false"
                     app:met_primaryColor="@color/colorAccent"/>

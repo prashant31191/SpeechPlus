@@ -19,5 +19,5 @@
     <string name="rating">Оценить приложение</string>
     <string name="select_language">Выберите язык</string>
     <string name="save">Сохранить</string>
-    <string name="hint_patter">Введите скороговорку</string>
+    <string name="hint_patter">Введите вашу скороговорку</string>
 </resources>

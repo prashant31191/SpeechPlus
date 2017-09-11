@@ -3,9 +3,8 @@
     <color name="colorPrimary">#ffffff</color>
     <color name="colorPrimaryDark">#f5f5f5</color>
     <color name="colorAccent">#E6651D</color>
-    <color name="colorBottomBarInActive">#464C5F</color>
+    <color name="colorBottomBarInActive">#263238</color>
     <color name="colorFavoriteButton">#FF6666</color>
     <color name="colorFabButtonNormal">#FFF</color>
     <color name="colorFabButtonRipple">#dcdcdc</color>
-    <color name="colorEditText">#494949</color>
 </resources>
