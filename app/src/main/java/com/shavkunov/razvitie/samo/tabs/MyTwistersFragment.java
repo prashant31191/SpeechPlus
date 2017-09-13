@@ -92,7 +92,7 @@ public class MyTwistersFragment extends Fragment {
     private void setRecyclerView() {
         myTwistersRecycler.setLayoutManager(SettingsLayoutManager.
                 getLayoutManager(getContext()));
-        myTwistersRecycler.setAdapter(new RecyclerViewAdapter(getActivity(), listItems, true));
+        myTwistersRecycler.setAdapter(new RecyclerViewAdapter(getActivity(), listItems));
     }
 
     @Override
