@@ -113,7 +113,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 speechHolder.favoriteButtonSpeech.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        setFavoriteButton(isSwitch, speechHolder, patter);
+                        patter.setFavorite(speechHolder.favoriteButtonSpeech.isChecked());
+                        cardLab.updateFavorite(patter);
                     }
                 });
                 break;
@@ -147,25 +148,5 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 .setDefaultRequestOptions(requestOptions)
                 .load(patter.getImageUrl())
                 .into(speechHolder.imageSpeech);
-    }
-
-    private void setFavoriteButton(boolean isSwitch, SpeechHolder holder, Patter patter) {
-        if (isSwitch) {
-            updateFavoriteButton(holder, patter);
-
-            try {
-                listItems.remove(holder.getAdapterPosition());
-                notifyItemRemoved(holder.getAdapterPosition());
-            } catch (ArrayIndexOutOfBoundsException e) {
-                Log.e(TAG, "The exception was caught");
-            }
-        } else {
-            updateFavoriteButton(holder, patter);
-        }
-    }
-
-    private void updateFavoriteButton(SpeechHolder holder, Patter patter) {
-        patter.setFavorite(holder.favoriteButtonSpeech.isChecked());
-        cardLab.updateFavorite(patter);
     }
 }
