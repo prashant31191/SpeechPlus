@@ -20,4 +20,6 @@
     <string name="select_language">Selecione um Idioma</string>
     <string name="save">Salvar</string>
     <string name="hint_patter">Digite seu trava-língua</string>
+    <string name="save_button_tip">Dados salvos</string>
+    <string name="choose_gallery">Selecione um aplicativo</string>
 </resources>

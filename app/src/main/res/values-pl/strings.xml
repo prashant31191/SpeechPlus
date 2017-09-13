@@ -20,4 +20,6 @@
     <string name="select_language">Wybierz język</string>
     <string name="hint_patter">Wprowadź swoją łamigłówka słowna</string>
     <string name="save">Zapisz</string>
+    <string name="save_button_tip">Zapisane dane</string>
+    <string name="choose_gallery">Wybierz aplikację</string>
 </resources>

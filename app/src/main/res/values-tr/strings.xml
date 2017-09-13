@@ -20,4 +20,6 @@
     <string name="select_language">Bir dil seçin</string>
     <string name="save">Tutmak</string>
     <string name="hint_patter">Giriş senin tekerleme</string>
+    <string name="save_button_tip">Veri kaydedildi</string>
+    <string name="choose_gallery">Bir uygulama seçin</string>
 </resources>

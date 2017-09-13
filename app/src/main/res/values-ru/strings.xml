@@ -20,4 +20,6 @@
     <string name="select_language">Выберите язык</string>
     <string name="save">Сохранить</string>
     <string name="hint_patter">Введите вашу скороговорку</string>
+    <string name="save_button_tip">Данные сохранены</string>
+    <string name="choose_gallery">Выберите приложение</string>
 </resources>

@@ -20,4 +20,6 @@
     <string name="select_language">Виберіть мову</string>
     <string name="save">Зберегти</string>
     <string name="hint_patter">Введіть скоромовку</string>
+    <string name="save_button_tip">Дані збережені</string>
+    <string name="choose_gallery">Виберіть програму</string>
 </resources>

@@ -20,4 +20,6 @@
     <string name="select_language">Тілді таңдаңыз</string>
     <string name="save">Сақтау</string>
     <string name="hint_patter">Енгізіңіз жаңылтпаш</string>
+    <string name="save_button_tip">Деректер сақталды</string>
+    <string name="choose_gallery">Қолданбаны таңдаңыз</string>
 </resources>

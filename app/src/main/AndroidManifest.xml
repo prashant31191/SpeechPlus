@@ -19,7 +19,7 @@
         </activity>
         <activity
             android:name=".controller.SettingsNewPatter"
-            android:label="@string/title_activity_settings_new_patter"
+            android:label=" "
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>

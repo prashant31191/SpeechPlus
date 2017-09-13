@@ -20,5 +20,6 @@
     <string name="select_language">Choose language</string>
     <string name="save">Save</string>
     <string name="hint_patter">Enter your patter</string>
-    <string name="title_activity_settings_new_patter"> </string>
+    <string name="save_button_tip">Data saved</string>
+    <string name="choose_gallery">Select an app</string>
 </resources>

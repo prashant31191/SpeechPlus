@@ -20,4 +20,6 @@
     <string name="select_language">Абярыце мову</string>
     <string name="save">Захаваць</string>
     <string name="hint_patter">Увядзіце хуткамоўкі</string>
+    <string name="save_button_tip">Дадзеныя захаваны</string>
+    <string name="choose_gallery">Выбраць прылажэньне</string>
 </resources>
