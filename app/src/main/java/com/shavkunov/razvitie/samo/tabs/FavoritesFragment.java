@@ -59,7 +59,7 @@ public class FavoritesFragment extends Fragment {
         favoritesRecyclerView.setItemAnimator(new SlideInLeftAnimator());
         favoritesRecyclerView.setLayoutManager(SettingsLayoutManager
                 .getLayoutManager(getContext()));
-        favoritesRecyclerView.setAdapter(new RecyclerViewAdapter(getActivity(), listItems, true));
+        favoritesRecyclerView.setAdapter(new RecyclerViewAdapter(getActivity(), listItems));
     }
 
     @Override

@@ -2,7 +2,6 @@ package com.shavkunov.razvitie.samo;
 
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,18 +25,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     private static final int SPEECH_HOLDER = 0;
     private static final int AD_HOLDER = 1;
-    private static final String TAG = "tag";
 
     private FragmentActivity fragmentActivity;
     private List<Object> listItems;
     private CardLab cardLab;
-    private boolean isSwitch;
 
-    public RecyclerViewAdapter(FragmentActivity fragmentActivity, List<Object> listItems,
-                               boolean isSwitch) {
+    public RecyclerViewAdapter(FragmentActivity fragmentActivity, List<Object> listItems) {
         this.fragmentActivity = fragmentActivity;
         this.listItems = listItems;
-        this.isSwitch = isSwitch;
         cardLab = new CardLab(fragmentActivity);
     }
 
