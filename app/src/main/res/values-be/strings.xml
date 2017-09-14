@@ -22,6 +22,7 @@
     <string name="hint_patter">Увядзіце хуткамоўкі</string>
     <string name="save_button_tip">Дадзеныя захаваны</string>
     <string name="choose_gallery">Выбраць прылажэньне</string>
-    <string name="favorites_subtitle">Дадаць хаця б адну хуткамоўкі</string>
-    <string name="favorites_title">Старонка - пустая!</string>
+    <string name="favorites_subtitle">Перайдзіце на галоўную старонку</string>
+    <string name="empty_title">Старонка - пустая!</string>
+    <string name="my_twisters_subtitle">Націсніце на кнопку, каб дадаць вашу хуткамоўкі</string>
 </resources>

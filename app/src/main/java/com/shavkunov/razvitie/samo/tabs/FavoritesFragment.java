@@ -3,6 +3,7 @@ package com.shavkunov.razvitie.samo.tabs;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -47,17 +48,17 @@ public class FavoritesFragment extends Fragment {
     @BindView(R.id.empty_subtitle)
     TextView emptySubtitle;
 
+    @Nullable
+    @BindView(R.id.fab_my_twisters)
+    FloatingActionButton fabTwisters;
+
     public static Fragment newInstance() {
         return new FavoritesFragment();
     }
 
     @LayoutRes
     private int getLayoutResId(boolean isEmpty) {
-        if (isEmpty) {
-            return R.layout.fragment_empty;
-        } else {
-            return R.layout.fragment_favorites;
-        }
+        return isEmpty ? R.layout.fragment_empty : R.layout.fragment_favorites;
     }
 
     @Override
@@ -79,11 +80,10 @@ public class FavoritesFragment extends Fragment {
     }
 
     private void setEmptyViews() {
-        emptyTitle.setText(R.string.favorites_title);
+        fabTwisters.hide();
+        emptyTitle.setText(R.string.empty_title);
         emptySubtitle.setText(R.string.favorites_subtitle);
-        Glide.with(getActivity())
-                .load(R.drawable.cancel)
-                .into(emptyImage);
+        Glide.with(getActivity()).load(R.drawable.cancel).into(emptyImage);
     }
 
     private void setNotEmptyViews(CardLab cardLab) {

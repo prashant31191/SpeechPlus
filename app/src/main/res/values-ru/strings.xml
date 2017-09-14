@@ -22,6 +22,7 @@
     <string name="hint_patter">Введите вашу скороговорку</string>
     <string name="save_button_tip">Данные сохранены</string>
     <string name="choose_gallery">Выберите приложение</string>
-    <string name="favorites_title">Пока что пусто!</string>
-    <string name="favorites_subtitle">Добавьте хотя бы одну скороговорку</string>
+    <string name="empty_title">Пока что пусто!</string>
+    <string name="favorites_subtitle">Перейдите на главную страницу</string>
+    <string name="my_twisters_subtitle">Нажмите на кнопку, чтобы добавить вашу скороговорку</string>
 </resources>

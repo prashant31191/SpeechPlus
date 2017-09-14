@@ -22,6 +22,7 @@
     <string name="hint_patter">Enter your patter</string>
     <string name="save_button_tip">Data saved</string>
     <string name="choose_gallery">Select an app</string>
-    <string name="favorites_subtitle">Add at least one patter</string>
-    <string name="favorites_title">No patters yet!</string>
+    <string name="favorites_subtitle">Go to the main page</string>
+    <string name="my_twisters_subtitle">Click on the button to add your tongue twister</string>
+    <string name="empty_title">No patters yet!</string>
 </resources>

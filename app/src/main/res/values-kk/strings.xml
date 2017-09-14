@@ -23,5 +23,6 @@
     <string name="save_button_tip">Деректер сақталды</string>
     <string name="choose_gallery">Қолданбаны таңдаңыз</string>
     <string name="favorites_subtitle">Басты бетке өтіңіз</string>
-    <string name="favorites_title">Бет бос!</string>
+    <string name="empty_title">Бет бос!</string>
+    <string name="my_twisters_subtitle">Жазбаны қосу үшін түймесін басыңыз</string>
 </resources>

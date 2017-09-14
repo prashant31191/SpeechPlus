@@ -22,6 +22,7 @@
     <string name="hint_patter">Digite seu trava-língua</string>
     <string name="save_button_tip">Dados salvos</string>
     <string name="choose_gallery">Selecione um aplicativo</string>
-    <string name="favorites_subtitle">Vá para a página inicial</string>
-    <string name="favorites_title">Está vazio aqui!</string>
+    <string name="favorites_subtitle">Ir para a página principal</string>
+    <string name="empty_title">Está vazio aqui!</string>
+    <string name="my_twisters_subtitle">Clique no botão para adicionar seu registro</string>
 </resources>
