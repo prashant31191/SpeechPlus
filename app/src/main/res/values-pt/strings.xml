@@ -5,14 +5,14 @@
     <string name="ad_id">ca-app-pub-5111154896006563/9312979281</string>
 
     <string-array name="array_languages">
-        <item>Русский язык</item>
-        <item>Українська мова</item>
-        <item>Беларуская мова</item>
-        <item>Қазақ тілі</item>
-        <item>Türk dili</item>
-        <item>Język polski</item>
-        <item>Língua portuguesa</item>
-        <item>English language</item>
+        <item>Russo</item>
+        <item>Ucraniano</item>
+        <item>Bielorrusso</item>
+        <item>Cazaque</item>
+        <item>Turco</item>
+        <item>Polonês</item>
+        <item>Português</item>
+        <item>Inglês</item>
     </string-array>
 
     <string name="app_name">Discurso+</string>

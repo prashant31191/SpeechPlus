@@ -5,14 +5,14 @@
     <string name="ad_id">ca-app-pub-5111154896006563/9312979281</string>
 
     <string-array name="array_languages">
-        <item>Русский язык</item>
-        <item>Українська мова</item>
-        <item>Беларуская мова</item>
-        <item>Қазақ тілі</item>
-        <item>Türk dili</item>
-        <item>Język polski</item>
-        <item>Língua portuguesa</item>
-        <item>English language</item>
+        <item>Рускі</item>
+        <item>Ўкраінскі</item>
+        <item>Беларускі</item>
+        <item>Казахскі</item>
+        <item>Турэцкі</item>
+        <item>Польскі</item>
+        <item>Партугальскі</item>
+        <item>Англійскі</item>
     </string-array>
 
     <string name="app_name">Гаворка+</string>
