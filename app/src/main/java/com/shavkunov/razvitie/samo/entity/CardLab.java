@@ -31,7 +31,7 @@ import static com.shavkunov.razvitie.samo.Constants.Admob.*;
 
 public class CardLab {
 
-    private static String TAG = "error";
+    private static String AD_ERROR = "adError";
 
     private String tableForDb;
 
@@ -91,7 +91,7 @@ public class CardLab {
                             adView.loadAd(new AdRequest.Builder().build());
                         }
                     } catch (IllegalArgumentException e) {
-                        Log.d(TAG, "IllegalArgumentException was caught");
+                        Log.d(AD_ERROR, e.getMessage());
                     }
                 }
             }
