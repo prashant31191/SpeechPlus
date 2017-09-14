@@ -3,6 +3,7 @@ package com.shavkunov.razvitie.samo.tabs;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,7 +37,6 @@ public class SpeechFragment extends Fragment {
     private Unbinder unbinder;
     private CardLab cardLab;
     private AsyncTask patterTask;
-    private RecyclerView.Adapter adapter;
 
     @BindView(R.id.speech_recycler)
     RecyclerView speechRecycler;
@@ -62,8 +62,7 @@ public class SpeechFragment extends Fragment {
     private void setRecyclerView() {
         speechRecycler.setLayoutManager(SettingsLayoutManager
                 .getLayoutManager(getContext()));
-        adapter = new RecyclerViewAdapter(getActivity(), listItems);
-        speechRecycler.setAdapter(adapter);
+        speechRecycler.setAdapter(new RecyclerViewAdapter(getActivity(), listItems));
     }
 
     @Override
@@ -136,7 +135,7 @@ public class SpeechFragment extends Fragment {
                         cardLab.addPatter(patter);
                     }
 
-                    updateListAndAdapter();
+                    updateList();
                 }
 
                 if (replaceVersion.size() != 0) {
@@ -144,15 +143,17 @@ public class SpeechFragment extends Fragment {
                         cardLab.updateUrlAndTitle(patter);
                     }
 
-                    updateListAndAdapter();
+                    updateList();
                 }
             }
         }
 
-        private void updateListAndAdapter() {
+        private void updateList() {
             listItems.clear();
             addPatters(cardLab);
-            adapter.notifyDataSetChanged();
+            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.fragment_container, new SpeechFragment());
+            ft.commit();
         }
 
         private void editList(List<Patter> listForView, List<Patter> listForRemove) {
