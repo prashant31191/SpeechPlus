@@ -25,4 +25,5 @@
     <string name="empty_title">Пока что пусто!</string>
     <string name="favorites_subtitle">Перейдите на главную страницу</string>
     <string name="my_twisters_subtitle">Нажмите на кнопку, чтобы добавить вашу скороговорку</string>
+    <string name="no_connection_subtitle">Включите интернет и нажмите на кнопку \"Обновить\"</string>
 </resources>

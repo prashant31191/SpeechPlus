@@ -2,14 +2,22 @@ package com.shavkunov.razvitie.samo.tabs;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
+import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.shavkunov.razvitie.samo.R;
 import com.shavkunov.razvitie.samo.RecyclerViewAdapter;
 import com.shavkunov.razvitie.samo.SettingsLayoutManager;
@@ -26,6 +34,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.OnTouch;
+import butterknife.Optional;
 import butterknife.Unbinder;
 
 public class SpeechFragment extends Fragment {
@@ -37,26 +48,101 @@ public class SpeechFragment extends Fragment {
     private Unbinder unbinder;
     private CardLab cardLab;
     private AsyncTask patterTask;
+    private float touchDown;
+    private float touchUp;
 
+    @Nullable
     @BindView(R.id.speech_recycler)
     RecyclerView speechRecycler;
+
+    @Nullable
+    @BindView(R.id.empty_image)
+    ImageView emptyImage;
+
+    @Nullable
+    @BindView(R.id.empty_title)
+    TextView emptyTitle;
+
+    @Nullable
+    @BindView(R.id.empty_subtitle)
+    TextView emptySubtitle;
+
+    @Nullable
+    @BindView(R.id.fab_my_twisters)
+    FloatingActionButton fabTwisters;
 
     public static Fragment newInstance() {
         return new SpeechFragment();
     }
 
+    @LayoutRes
+    private int getLayoutResId(boolean isEmpty) {
+        return isEmpty ? R.layout.fragment_empty : R.layout.fragment_speech;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_speech, container, false);
-        unbinder = ButterKnife.bind(this, view);
-
         cardLab = new CardLab(getActivity());
         patterTask = new PatterTask().execute();
-        setRecyclerView();
         addPatters(cardLab);
-        cardLab.addNativeAds(listItems, speechRecycler);
+        boolean isEmpty = listItems.size() == 0;
+
+        View view = inflater.inflate(getLayoutResId(isEmpty), container, false);
+        unbinder = ButterKnife.bind(this, view);
+
+        if (isEmpty && !cardLab.isOnline()) {
+            setEmptyViews();
+        } else if (!isEmpty) {
+            setNotEmptyViews(cardLab);
+        }
+
         return view;
+    }
+
+    @Optional
+    @OnTouch(R.id.nested_twisters)
+    public boolean onTouchNested(MotionEvent event) {
+        getTouch(event);
+        return false;
+    }
+
+    @Optional
+    @OnClick(R.id.fab_my_twisters)
+    public void onFabClick() {
+        if (cardLab.isOnline()) {
+            updateFragment();
+        }
+    }
+
+    private void getTouch(MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                touchDown = event.getY();
+                break;
+            case MotionEvent.ACTION_UP:
+                touchUp = event.getY();
+                break;
+        }
+
+        if (touchDown > touchUp && fabTwisters.getVisibility() == View.VISIBLE) {
+            fabTwisters.hide();
+        } else if (touchDown < touchUp && fabTwisters.getVisibility() != View.VISIBLE) {
+            fabTwisters.show();
+        }
+    }
+
+    private void setEmptyViews() {
+        fabTwisters.setVisibility(View.VISIBLE);
+        fabTwisters.setImageResource(R.drawable.refresh);
+        emptyTitle.setText(R.string.empty_title);
+        emptySubtitle.setText(R.string.no_connection_subtitle);
+        Glide.with(getActivity()).load(R.drawable.cancel).into(emptyImage);
+    }
+
+    private void setNotEmptyViews(CardLab cardLab) {
+        setRecyclerView();
+        cardLab.addNativeAds(listItems, speechRecycler);
     }
 
     private void setRecyclerView() {
@@ -69,7 +155,10 @@ public class SpeechFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
-        patterTask.cancel(true);
+
+        if (patterTask != null) {
+            patterTask.cancel(true);
+        }
     }
 
     private void addPatters(CardLab cardLab) {
@@ -151,9 +240,7 @@ public class SpeechFragment extends Fragment {
         private void updateList() {
             listItems.clear();
             addPatters(cardLab);
-            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.fragment_container, new SpeechFragment());
-            ft.commit();
+            updateFragment();
         }
 
         private void editList(List<Patter> listForView, List<Patter> listForRemove) {
@@ -166,5 +253,11 @@ public class SpeechFragment extends Fragment {
                 }
             }
         }
+    }
+
+    private void updateFragment() {
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.fragment_container, SpeechFragment.newInstance());
+        ft.commit();
     }
 }

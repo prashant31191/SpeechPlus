@@ -25,4 +25,5 @@
     <string name="favorites_subtitle">Go to the main page</string>
     <string name="my_twisters_subtitle">Click on the button to add your tongue twister</string>
     <string name="empty_title">No patters yet!</string>
+    <string name="no_connection_subtitle">Turn on the Internet and click on the \"Update\"</string>
 </resources>

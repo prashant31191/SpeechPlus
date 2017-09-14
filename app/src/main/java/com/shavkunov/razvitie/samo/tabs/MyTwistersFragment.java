@@ -78,6 +78,7 @@ public class MyTwistersFragment extends Fragment {
 
         View view = inflater.inflate(getLayoutResId(isEmpty), containter, false);
         unbinder = ButterKnife.bind(this, view);
+        fabMyTwisters.setVisibility(View.VISIBLE);
 
         if (isEmpty) {
             setEmptyViews();
@@ -89,6 +90,7 @@ public class MyTwistersFragment extends Fragment {
     }
 
     private void setEmptyViews() {
+        fabMyTwisters.setImageResource(R.drawable.plus);
         emptyTitle.setText(R.string.empty_title);
         emptySubtitle.setText(R.string.my_twisters_subtitle);
         Glide.with(getActivity()).load(R.drawable.cancel).into(emptyImage);

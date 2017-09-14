@@ -25,4 +25,5 @@
     <string name="empty_title">Сторінка - порожня!</string>
     <string name="favorites_subtitle">Перейдіть на головну сторінку</string>
     <string name="my_twisters_subtitle">Натисніть на кнопку, щоб додати вашу скоромовку</string>
+    <string name="no_connection_subtitle">Увімкніть інтернет і натисніть «Оновити»</string>
 </resources>

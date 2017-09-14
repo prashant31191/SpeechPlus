@@ -25,4 +25,5 @@
     <string name="favorites_subtitle">Басты бетке өтіңіз</string>
     <string name="empty_title">Бет бос!</string>
     <string name="my_twisters_subtitle">Жазбаны қосу үшін түймесін басыңыз</string>
+    <string name="no_connection_subtitle">Іске қосыңыз интернет және батырмасын басыңыз \"Жаңарту\"</string>
 </resources>
