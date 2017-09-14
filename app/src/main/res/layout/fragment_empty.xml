@@ -47,7 +47,7 @@
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center"
                 android:textSize="@dimen/title_size"
-                tools:text="@string/favorites_subtitle"/>
+                tools:text="@string/no_connection_subtitle"/>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
@@ -59,6 +59,7 @@
         android:layout_marginBottom="@dimen/fab_margin_bottom"
         android:layout_marginLeft="@dimen/fab_margin"
         android:layout_marginRight="@dimen/fab_margin"
+        android:visibility="invisible"
         android:layout_marginTop="@dimen/fab_margin"
         app:backgroundTint="@color/colorFabButtonNormal"
         app:rippleColor="@color/colorFabButtonRipple"

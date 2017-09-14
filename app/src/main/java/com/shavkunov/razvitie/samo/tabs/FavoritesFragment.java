@@ -48,10 +48,6 @@ public class FavoritesFragment extends Fragment {
     @BindView(R.id.empty_subtitle)
     TextView emptySubtitle;
 
-    @Nullable
-    @BindView(R.id.fab_my_twisters)
-    FloatingActionButton fabTwisters;
-
     public static Fragment newInstance() {
         return new FavoritesFragment();
     }
@@ -76,11 +72,11 @@ public class FavoritesFragment extends Fragment {
         } else {
             setNotEmptyViews(cardLab);
         }
+
         return view;
     }
 
     private void setEmptyViews() {
-        fabTwisters.hide();
         emptyTitle.setText(R.string.empty_title);
         emptySubtitle.setText(R.string.favorites_subtitle);
         Glide.with(getActivity()).load(R.drawable.cancel).into(emptyImage);

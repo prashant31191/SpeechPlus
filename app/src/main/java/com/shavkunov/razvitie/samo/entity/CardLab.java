@@ -60,7 +60,7 @@ public class CardLab {
         }
     }
 
-    private boolean isOnline() {
+    public boolean isOnline() {
         ConnectivityManager cm =
                 (ConnectivityManager) fragmentActivity.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo =

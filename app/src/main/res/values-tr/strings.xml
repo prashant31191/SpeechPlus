@@ -25,4 +25,5 @@
     <string name="favorites_subtitle">Ana sayfaya git</string>
     <string name="empty_title">Sayfa boş!</string>
     <string name="my_twisters_subtitle">Kayıt eklemek için düğmeyi tıklayın</string>
+    <string name="no_connection_subtitle">İnternet\'i açın ve Güncelle\'yi tıklayın</string>
 </resources>

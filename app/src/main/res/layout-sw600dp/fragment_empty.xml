@@ -59,6 +59,7 @@
         android:layout_marginBottom="@dimen/fab_margin_bottom"
         android:layout_marginLeft="@dimen/fab_margin"
         android:layout_marginRight="@dimen/fab_margin"
+        android:visibility="invisible"
         android:layout_marginTop="@dimen/fab_margin"
         app:backgroundTint="@color/colorFabButtonNormal"
         app:rippleColor="@color/colorFabButtonRipple"

@@ -78,6 +78,7 @@ public class MyTwistersFragment extends Fragment {
 
         View view = inflater.inflate(getLayoutResId(isEmpty), containter, false);
         unbinder = ButterKnife.bind(this, view);
+        fabMyTwisters.setVisibility(View.VISIBLE);
 
         if (isEmpty) {
             setEmptyViews();
