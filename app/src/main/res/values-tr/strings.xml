@@ -22,4 +22,6 @@
     <string name="hint_patter">Giriş senin tekerleme</string>
     <string name="save_button_tip">Veri kaydedildi</string>
     <string name="choose_gallery">Bir uygulama seçin</string>
+    <string name="favorites_subtitle">Ana sayfasına gidin</string>
+    <string name="favorites_title">Sayfa boş!</string>
 </resources>

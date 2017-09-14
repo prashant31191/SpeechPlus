@@ -22,4 +22,6 @@
     <string name="save">Zapisz</string>
     <string name="save_button_tip">Zapisane dane</string>
     <string name="choose_gallery">Wybierz aplikację</string>
+    <string name="favorites_subtitle">Przejdź do strony głównej</string>
+    <string name="favorites_title">Strona jest pusta!</string>
 </resources>

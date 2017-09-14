@@ -22,4 +22,6 @@
     <string name="hint_patter">Digite seu trava-língua</string>
     <string name="save_button_tip">Dados salvos</string>
     <string name="choose_gallery">Selecione um aplicativo</string>
+    <string name="favorites_subtitle">Vá para a página inicial</string>
+    <string name="favorites_title">Está vazio aqui!</string>
 </resources>

@@ -22,4 +22,6 @@
     <string name="hint_patter">Увядзіце хуткамоўкі</string>
     <string name="save_button_tip">Дадзеныя захаваны</string>
     <string name="choose_gallery">Выбраць прылажэньне</string>
+    <string name="favorites_subtitle">Дадаць хаця б адну хуткамоўкі</string>
+    <string name="favorites_title">Старонка - пустая!</string>
 </resources>

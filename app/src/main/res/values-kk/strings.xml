@@ -22,4 +22,6 @@
     <string name="hint_patter">Енгізіңіз жаңылтпаш</string>
     <string name="save_button_tip">Деректер сақталды</string>
     <string name="choose_gallery">Қолданбаны таңдаңыз</string>
+    <string name="favorites_subtitle">Басты бетке өтіңіз</string>
+    <string name="favorites_title">Бет бос!</string>
 </resources>
