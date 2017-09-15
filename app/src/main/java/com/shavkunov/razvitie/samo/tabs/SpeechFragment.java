@@ -21,6 +21,7 @@ import com.bumptech.glide.Glide;
 import com.shavkunov.razvitie.samo.R;
 import com.shavkunov.razvitie.samo.RecyclerViewAdapter;
 import com.shavkunov.razvitie.samo.SettingsLayoutManager;
+import com.shavkunov.razvitie.samo.SettingsHideAndShowFab;
 import com.shavkunov.razvitie.samo.entity.Patter;
 import com.shavkunov.razvitie.samo.entity.CardLab;
 
@@ -103,7 +104,8 @@ public class SpeechFragment extends Fragment {
     @Optional
     @OnTouch(R.id.nested_twisters)
     public boolean onTouchNested(MotionEvent event) {
-        getTouch(event);
+        SettingsHideAndShowFab screen = new SettingsHideAndShowFab(touchDown, touchUp, fabTwisters);
+        screen.getTouch(event);
         return false;
     }
 
@@ -114,23 +116,6 @@ public class SpeechFragment extends Fragment {
             updateFragment();
         } else {
             Toast.makeText(getActivity(), R.string.no_connection, Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void getTouch(MotionEvent event) {
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                touchDown = event.getY();
-                break;
-            case MotionEvent.ACTION_UP:
-                touchUp = event.getY();
-                break;
-        }
-
-        if (touchDown > touchUp && fabTwisters.getVisibility() == View.VISIBLE) {
-            fabTwisters.hide();
-        } else if (touchDown < touchUp && fabTwisters.getVisibility() != View.VISIBLE) {
-            fabTwisters.show();
         }
     }
 

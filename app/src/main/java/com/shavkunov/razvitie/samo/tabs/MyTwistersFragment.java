@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.shavkunov.razvitie.samo.R;
 import com.shavkunov.razvitie.samo.RecyclerViewAdapter;
 import com.shavkunov.razvitie.samo.SettingsLayoutManager;
+import com.shavkunov.razvitie.samo.SettingsHideAndShowFab;
 import com.shavkunov.razvitie.samo.controller.SettingsNewPatter;
 import com.shavkunov.razvitie.samo.entity.CardLab;
 import com.shavkunov.razvitie.samo.entity.Patter;
@@ -116,20 +117,8 @@ public class MyTwistersFragment extends Fragment {
     }
 
     private void getTouch(MotionEvent event) {
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                touchDown = event.getY();
-                break;
-            case MotionEvent.ACTION_UP:
-                touchUp = event.getY();
-                break;
-        }
-
-        if (touchDown > touchUp && fabMyTwisters.getVisibility() == View.VISIBLE) {
-            fabMyTwisters.hide();
-        } else if (touchDown < touchUp && fabMyTwisters.getVisibility() != View.VISIBLE) {
-            fabMyTwisters.show();
-        }
+        SettingsHideAndShowFab screen = new SettingsHideAndShowFab(touchDown, touchUp, fabMyTwisters);
+        screen.getTouch(event);
     }
 
     @OnClick(R.id.fab_my_twisters)
