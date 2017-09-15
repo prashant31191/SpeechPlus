@@ -32,6 +32,7 @@ public class SettingsNewPatter extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ButterKnife.bind(this);
+        Glide.with(this).load(R.drawable.logo).into(headerLogo);
     }
 
     @OnClick(R.id.fab_new_patter)

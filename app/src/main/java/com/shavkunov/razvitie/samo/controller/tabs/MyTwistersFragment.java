@@ -32,12 +32,11 @@ import butterknife.OnClick;
 import butterknife.OnTouch;
 import butterknife.Optional;
 import butterknife.Unbinder;
+import top.wefor.circularanim.CircularAnim;
 
 public class MyTwistersFragment extends Fragment {
 
     private List<Object> listItems = new ArrayList<>();
-    private float touchDown;
-    private float touchUp;
 
     private Unbinder unbinder;
 
@@ -117,14 +116,21 @@ public class MyTwistersFragment extends Fragment {
     }
 
     private void getTouch(MotionEvent event) {
-        SettingsHideAndShowFab screen = new SettingsHideAndShowFab(touchDown, touchUp, fabMyTwisters);
+        SettingsHideAndShowFab screen = new SettingsHideAndShowFab(fabMyTwisters);
         screen.getTouch(event);
     }
 
     @OnClick(R.id.fab_my_twisters)
     public void onFabClick() {
-        Intent intent = new Intent(getActivity(), SettingsNewPatter.class);
-        startActivity(intent);
+        CircularAnim.fullActivity(getActivity(), fabMyTwisters)
+                .duration(500)
+                .colorOrImageRes(R.color.colorPrimaryDark)
+                .go(new CircularAnim.OnAnimationEndListener() {
+                    @Override
+                    public void onAnimationEnd() {
+                        startActivity(new Intent(getActivity(), SettingsNewPatter.class));
+                    }
+                });
     }
 
     private void addPatters(CardLab cardLab) {

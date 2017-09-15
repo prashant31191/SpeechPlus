@@ -21,6 +21,7 @@ import com.shavkunov.razvitie.samo.controller.tabs.SpeechFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import top.wefor.circularanim.CircularAnim;
 
 public class SpeechActivity extends AppCompatActivity {
 

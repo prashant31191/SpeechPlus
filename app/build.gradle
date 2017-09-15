@@ -50,4 +50,5 @@ dependencies {
     compile 'com.google.android.gms:play-services-ads:11.0.4'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
+    compile 'com.github.XunMengWinter:CircularAnim:0.3.4'
 }

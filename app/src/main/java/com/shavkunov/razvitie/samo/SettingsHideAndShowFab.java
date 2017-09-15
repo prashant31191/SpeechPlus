@@ -10,10 +10,7 @@ public class SettingsHideAndShowFab {
     private float touchUp;
     private FloatingActionButton fabTwisters;
 
-    public SettingsHideAndShowFab(float touchDown, float touchUp,
-                                  FloatingActionButton fabTwisters) {
-        this.touchDown = touchDown;
-        this.touchUp = touchUp;
+    public SettingsHideAndShowFab(FloatingActionButton fabTwisters) {
         this.fabTwisters = fabTwisters;
     }
 

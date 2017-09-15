@@ -39,6 +39,7 @@ import butterknife.OnClick;
 import butterknife.OnTouch;
 import butterknife.Optional;
 import butterknife.Unbinder;
+import top.wefor.circularanim.CircularAnim;
 
 public class SpeechFragment extends Fragment {
 
@@ -49,8 +50,6 @@ public class SpeechFragment extends Fragment {
     private Unbinder unbinder;
     private CardLab cardLab;
     private AsyncTask patterTask;
-    private float touchDown;
-    private float touchUp;
 
     @Nullable
     @BindView(R.id.speech_recycler)
@@ -104,7 +103,7 @@ public class SpeechFragment extends Fragment {
     @Optional
     @OnTouch(R.id.nested_twisters)
     public boolean onTouchNested(MotionEvent event) {
-        SettingsHideAndShowFab screen = new SettingsHideAndShowFab(touchDown, touchUp, fabTwisters);
+        SettingsHideAndShowFab screen = new SettingsHideAndShowFab(fabTwisters);
         screen.getTouch(event);
         return false;
     }
@@ -113,7 +112,15 @@ public class SpeechFragment extends Fragment {
     @OnClick(R.id.fab_my_twisters)
     public void onFabClick() {
         if (cardLab.isOnline()) {
-            updateFragment();
+            CircularAnim.fullActivity(getActivity(), fabTwisters)
+                    .duration(500)
+                    .colorOrImageRes(R.color.colorPrimaryDark)
+                    .go(new CircularAnim.OnAnimationEndListener() {
+                        @Override
+                        public void onAnimationEnd() {
+                            updateFragment();
+                        }
+                    });
         } else {
             Toast.makeText(getActivity(), R.string.no_connection, Toast.LENGTH_SHORT).show();
         }
