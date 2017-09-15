@@ -14,10 +14,10 @@ import com.google.android.gms.ads.MobileAds;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 import com.shavkunov.razvitie.samo.R;
-import com.shavkunov.razvitie.samo.tabs.FavoritesFragment;
-import com.shavkunov.razvitie.samo.tabs.MyTwistersFragment;
-import com.shavkunov.razvitie.samo.tabs.SettingsFragment;
-import com.shavkunov.razvitie.samo.tabs.SpeechFragment;
+import com.shavkunov.razvitie.samo.controller.tabs.FavoritesFragment;
+import com.shavkunov.razvitie.samo.controller.tabs.MyTwistersFragment;
+import com.shavkunov.razvitie.samo.controller.tabs.SettingsFragment;
+import com.shavkunov.razvitie.samo.controller.tabs.SpeechFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

@@ -21,7 +21,7 @@ import com.shavkunov.razvitie.samo.Constants.Url;
 import com.shavkunov.razvitie.samo.R;
 import com.shavkunov.razvitie.samo.database.SpeechBaseHelper;
 import com.shavkunov.razvitie.samo.database.SpeechCursorWrapper;
-import com.shavkunov.razvitie.samo.tabs.SettingsFragment;
+import com.shavkunov.razvitie.samo.controller.tabs.SettingsFragment;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.shavkunov.razvitie.samo.tabs;
+package com.shavkunov.razvitie.samo.controller.tabs;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
