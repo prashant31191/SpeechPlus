@@ -2,11 +2,15 @@ package com.shavkunov.razvitie.samo.controller;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.ads.MobileAds;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 import com.shavkunov.razvitie.samo.R;
@@ -16,17 +20,16 @@ import com.shavkunov.razvitie.samo.tabs.SettingsFragment;
 import com.shavkunov.razvitie.samo.tabs.SpeechFragment;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
-public class SpeechActivity extends SingleFragmentActivity {
+public class SpeechActivity extends AppCompatActivity {
 
     private Fragment fragment;
 
     @BindView(R.id.bottomBar)
     BottomBar bottomBar;
 
-    @Override
-    protected void setBottomBar() {
-        super.setBottomBar();
+    private void setBottomBar() {
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {
@@ -45,14 +48,19 @@ public class SpeechActivity extends SingleFragmentActivity {
                         break;
                 }
 
-                SpeechActivity.super.replaceFragment();
+                replaceFragment();
             }
         });
     }
 
-    @Override
-    protected Fragment createFragment() {
+    private Fragment createFragment() {
         return fragment;
+    }
+
+    private void replaceFragment() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.fragment_container, createFragment());
+        ft.commit();
     }
 
     @Override
@@ -72,5 +80,16 @@ public class SpeechActivity extends SingleFragmentActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_fragment);
+        MobileAds.initialize(this, getString(R.string.ad_api));
+        ButterKnife.bind(this);
+
+        setBottomBar();
+        replaceFragment();
     }
 }
