@@ -26,4 +26,5 @@
     <string name="empty_title">Strona jest pusta!</string>
     <string name="my_twisters_subtitle">Kliknij przycisk, aby dodać swój rekord</string>
     <string name="no_connection_subtitle">Włącz internet i kliknij na \"Aktualizuj\"</string>
+    <string name="no_connection">Brak połączenia z Internetem</string>
 </resources>

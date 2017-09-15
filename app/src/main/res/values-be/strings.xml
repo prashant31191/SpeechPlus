@@ -26,4 +26,5 @@
     <string name="empty_title">Старонка - пустая!</string>
     <string name="my_twisters_subtitle">Націсніце на кнопку, каб дадаць вашу хуткамоўкі</string>
     <string name="no_connection_subtitle">Уключыце інтэрнэт і націсніце на кнопку \"Абнавіць\"</string>
+    <string name="no_connection">Няма злучэння з інтэрнэтам</string>
 </resources>

@@ -26,4 +26,5 @@
     <string name="empty_title">Sayfa boş!</string>
     <string name="my_twisters_subtitle">Kayıt eklemek için düğmeyi tıklayın</string>
     <string name="no_connection_subtitle">İnternet\'i açın ve Güncelle\'yi tıklayın</string>
+    <string name="no_connection">İnternet bağlantısı yok</string>
 </resources>
