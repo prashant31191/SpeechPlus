@@ -57,6 +57,10 @@ public class SettingsNewPatter extends AppCompatActivity {
     }
 
     private void setupImage(String selectedImage, int standardImage) {
+        if (selectedImage != null && standardImage != 0) {
+            return;
+        }
+
         if (selectedImage != null) {
             Glide.with(this).load(selectedImage).into(headerLogo);
         }
