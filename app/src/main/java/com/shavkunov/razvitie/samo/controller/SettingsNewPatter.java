@@ -19,6 +19,7 @@ import butterknife.OnClick;
 public class SettingsNewPatter extends AppCompatActivity {
 
     private static final int GALLERY_REQUEST = 1;
+    private static final String STATE_IMAGE = "stateImage";
 
     private String selectedImage;
 
@@ -32,7 +33,34 @@ public class SettingsNewPatter extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ButterKnife.bind(this);
-        Glide.with(this).load(R.drawable.logo).into(headerLogo);
+
+        if (savedInstanceState != null) {
+            selectedImage = savedInstanceState.getString(STATE_IMAGE);
+        }
+
+        if (selectedImage != null) {
+            setupImage(selectedImage);
+        } else {
+            setupImage(R.drawable.logo);
+        }
+    }
+
+    private void setupImage(int standardImage) {
+        this.setupImage(null, standardImage);
+    }
+
+    private void setupImage(String selectedImage) {
+        this.setupImage(selectedImage, 0);
+    }
+
+    private void setupImage(String selectedImage, int standardImage) {
+        if (selectedImage != null) {
+            Glide.with(this).load(selectedImage).into(headerLogo);
+        }
+
+        if (standardImage != 0) {
+            Glide.with(this).load(standardImage).into(headerLogo);
+        }
     }
 
     @OnClick(R.id.fab_new_patter)
@@ -58,10 +86,13 @@ public class SettingsNewPatter extends AppCompatActivity {
                 if (resultCode == RESULT_OK) {
                     Uri uri = intent.getData();
                     selectedImage = String.valueOf(uri);
-                    Glide.with(this)
-                            .load(selectedImage)
-                            .into(headerLogo);
+                    setupImage(selectedImage);
                 }
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putString(STATE_IMAGE, selectedImage);
     }
 }

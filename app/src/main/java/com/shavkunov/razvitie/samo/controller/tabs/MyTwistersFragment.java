@@ -128,9 +128,9 @@ public class MyTwistersFragment extends Fragment {
                 .go(new CircularAnim.OnAnimationEndListener() {
                     @Override
                     public void onAnimationEnd() {
-                        startActivity(new Intent(getActivity(), SettingsNewPatter.class));
                     }
                 });
+        startActivity(new Intent(getActivity(), SettingsNewPatter.class));
     }
 
     private void addPatters(CardLab cardLab) {
