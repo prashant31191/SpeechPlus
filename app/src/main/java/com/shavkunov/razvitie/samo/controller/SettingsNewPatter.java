@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.rengwuxian.materialedittext.MaterialEditText;
 import com.shavkunov.razvitie.samo.R;
 
 import butterknife.BindView;
@@ -24,6 +25,9 @@ public class SettingsNewPatter extends AppCompatActivity {
 
     @BindView(R.id.header_logo)
     ImageView headerLogo;
+
+    @BindView(R.id.edit_patter)
+    MaterialEditText editPatter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +77,13 @@ public class SettingsNewPatter extends AppCompatActivity {
 
     @OnClick(R.id.save_button)
     public void onSaveButtonClick(View view) {
-        Snackbar.make(view, R.string.save_button_tip, Snackbar.LENGTH_SHORT).show();
+        String editText = editPatter.getText().toString();
+
+        if (!editText.equals("")) {
+            Snackbar.make(view, R.string.save_button_tip, Snackbar.LENGTH_SHORT).show();
+        } else {
+            editPatter.setError(getString(R.string.edit_patter_empty));
+        }
     }
 
     @Override
