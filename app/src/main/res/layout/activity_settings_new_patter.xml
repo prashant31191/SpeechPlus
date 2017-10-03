@@ -23,7 +23,7 @@
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|snap">
 
-            <ImageView
+            <com.flaviofaria.kenburnsview.KenBurnsView
                 android:id="@+id/header_logo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

@@ -6,9 +6,9 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.flaviofaria.kenburnsview.KenBurnsView;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.shavkunov.razvitie.samo.R;
 
@@ -24,7 +24,7 @@ public class SettingsNewPatter extends AppCompatActivity {
     private String selectedImage;
 
     @BindView(R.id.header_logo)
-    ImageView headerLogo;
+    KenBurnsView headerLogo;
 
     @BindView(R.id.edit_patter)
     MaterialEditText editPatter;
@@ -93,7 +93,8 @@ public class SettingsNewPatter extends AppCompatActivity {
         switch (requestCode) {
             case GALLERY_REQUEST:
                 if (resultCode == RESULT_OK) {
-                    setupImage(String.valueOf(intent.getData()));
+                    selectedImage = String.valueOf(intent.getData());
+                    setupImage(selectedImage);
                 }
         }
     }
