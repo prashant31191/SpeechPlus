@@ -28,4 +28,8 @@
     <string name="no_connection_subtitle">Іске қосыңыз интернет және батырмасын басыңыз \"Жаңарту\"</string>
     <string name="no_connection">Интернетке қосылу жоқ</string>
     <string name="edit_patter_empty">Өріс бос, бір нәрсе жазыңыз</string>
+    <string name="back">Артқа қайту</string>
+    <string name="ok">Иә</string>
+    <string name="delete">Жою</string>
+    <string name="delete_dialog_text">Сіз бұл хабарламаны жойғыңыз келе ме?</string>
 </resources>

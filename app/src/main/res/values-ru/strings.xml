@@ -28,4 +28,8 @@
     <string name="no_connection_subtitle">Включите интернет и нажмите на кнопку \"Обновить\"</string>
     <string name="no_connection">Нет соединения с интернетом</string>
     <string name="edit_patter_empty">Поле пустое, напишите что-нибудь</string>
+    <string name="ok">OK</string>
+    <string name="back">Назад</string>
+    <string name="delete_dialog_text">Вы уверенны, что хотите удалить запись?</string>
+    <string name="delete">Удаление</string>
 </resources>

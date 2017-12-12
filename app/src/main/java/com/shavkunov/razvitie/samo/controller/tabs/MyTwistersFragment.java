@@ -1,11 +1,13 @@
 package com.shavkunov.razvitie.samo.controller.tabs;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -36,9 +38,11 @@ import top.wefor.circularanim.CircularAnim;
 
 public class MyTwistersFragment extends Fragment {
 
-    private List<Object> listItems = new ArrayList<>();
+    private static final int REQUEST_CODE_SETTINGS = 0;
 
+    private List<Object> listItems = new ArrayList<>();
     private Unbinder unbinder;
+    private CardLab cardLab;
 
     @Nullable
     @BindView(R.id.my_twisters_recycler)
@@ -72,7 +76,7 @@ public class MyTwistersFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup containter,
                              Bundle savedInstanceState) {
-        CardLab cardLab = new CardLab(getActivity());
+        cardLab = new CardLab(getActivity());
         addPatters(cardLab);
         boolean isEmpty = listItems.size() == 0;
 
@@ -130,12 +134,13 @@ public class MyTwistersFragment extends Fragment {
                     public void onAnimationEnd() {
                     }
                 });
-        startActivity(new Intent(getActivity(), SettingsNewPatter.class));
+        startActivityForResult(new Intent(getActivity(), SettingsNewPatter.class),
+                REQUEST_CODE_SETTINGS);
     }
 
     private void addPatters(CardLab cardLab) {
-        for (int i = 0; i < cardLab.getFavoriteList().size(); i++) {
-            Patter patter = cardLab.getFavoriteList().get(i);
+        for (int i = 0; i < cardLab.getYourPattersList().size(); i++) {
+            Patter patter = cardLab.getYourPattersList().get(i);
             listItems.add(patter);
         }
     }
@@ -143,7 +148,25 @@ public class MyTwistersFragment extends Fragment {
     private void setRecyclerView() {
         myTwistersRecycler.setLayoutManager(SettingsLayoutManager.
                 getLayoutManager(getContext()));
-        myTwistersRecycler.setAdapter(new RecyclerViewAdapter(getActivity(), listItems));
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity(), listItems, true);
+        myTwistersRecycler.setAdapter(adapter);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK) {
+            Patter patter = new Patter();
+            patter.setImageUrl(data.getStringExtra(SettingsNewPatter.EXTRA_IMAGE));
+            patter.setTitle(data.getStringExtra(SettingsNewPatter.EXTRA_PATTER));
+            cardLab.addYourPatter(patter);
+            updateFragment();
+        }
+    }
+
+    private void updateFragment() {
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.fragment_container, MyTwistersFragment.newInstance());
+        ft.commit();
     }
 
     @Override

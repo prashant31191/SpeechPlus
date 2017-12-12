@@ -28,4 +28,8 @@
     <string name="no_connection_subtitle">Turn on the Internet and click on the \"Update\"</string>
     <string name="no_connection">No internet connection</string>
     <string name="edit_patter_empty">The field is empty, write something</string>
+    <string name="back">Back</string>
+    <string name="delete">Delete</string>
+    <string name="delete_dialog_text">Are you sure you want to delete the post?</string>
+    <string name="ok">OK</string>
 </resources>

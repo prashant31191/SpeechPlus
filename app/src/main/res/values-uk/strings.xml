@@ -28,4 +28,8 @@
     <string name="no_connection_subtitle">Увімкніть інтернет і натисніть «Оновити»</string>
     <string name="no_connection">Немає з\'єднання з інтернетом</string>
     <string name="edit_patter_empty">Поле пусте, напишіть що-небудь</string>
+    <string name="back">Назад</string>
+    <string name="delete">Видалення</string>
+    <string name="delete_dialog_text">Ви впевнені, що хочете видалити запис?</string>
+    <string name="ok">ОК</string>
 </resources>

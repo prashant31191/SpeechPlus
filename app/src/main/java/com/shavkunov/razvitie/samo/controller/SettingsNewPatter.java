@@ -20,8 +20,12 @@ public class SettingsNewPatter extends AppCompatActivity {
 
     private static final int GALLERY_REQUEST = 1;
     private static final String STATE_IMAGE = "stateImage";
+    private static final String STATE_PATTER = "statePatter";
+    public static final String EXTRA_IMAGE = "extraImage";
+    public static final String EXTRA_PATTER = "extraPatter";
 
     private String selectedImage;
+    private String yourPatter;
 
     @BindView(R.id.header_logo)
     KenBurnsView headerLogo;
@@ -39,6 +43,11 @@ public class SettingsNewPatter extends AppCompatActivity {
 
         if (savedInstanceState != null) {
             selectedImage = savedInstanceState.getString(STATE_IMAGE);
+            yourPatter = savedInstanceState.getString(STATE_PATTER);
+        }
+
+        if (yourPatter != null) {
+            editPatter.setText(yourPatter);
         }
 
         if (selectedImage != null) {
@@ -81,10 +90,15 @@ public class SettingsNewPatter extends AppCompatActivity {
 
     @OnClick(R.id.save_button)
     public void onSaveButtonClick(View view) {
-        String editText = editPatter.getText().toString();
+        saveEditText();
 
-        if (!editText.equals("")) {
+        if (!yourPatter.equals("")) {
             Snackbar.make(view, R.string.save_button_tip, Snackbar.LENGTH_SHORT).show();
+
+            Intent intent = new Intent();
+            intent.putExtra(EXTRA_IMAGE, selectedImage);
+            intent.putExtra(EXTRA_PATTER, yourPatter);
+            setResult(RESULT_OK, intent);
         } else {
             editPatter.setError(getString(R.string.edit_patter_empty));
         }
@@ -104,7 +118,18 @@ public class SettingsNewPatter extends AppCompatActivity {
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        saveEditText();
+    }
+
+    private void saveEditText() {
+        yourPatter = editPatter.getText().toString();
+    }
+
+    @Override
     protected void onSaveInstanceState(Bundle savedInstanceState) {
         savedInstanceState.putString(STATE_IMAGE, selectedImage);
+        savedInstanceState.putString(STATE_PATTER, yourPatter);
     }
 }
