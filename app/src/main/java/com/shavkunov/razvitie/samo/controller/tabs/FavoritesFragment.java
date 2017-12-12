@@ -96,7 +96,7 @@ public class FavoritesFragment extends Fragment {
     private void setRecyclerView() {
         favoritesRecyclerView.setLayoutManager(SettingsLayoutManager
                 .getLayoutManager(getContext()));
-        favoritesRecyclerView.setAdapter(new RecyclerViewAdapter(getActivity(), listItems));
+        favoritesRecyclerView.setAdapter(new RecyclerViewAdapter(getActivity(), listItems, false));
     }
 
     @Override

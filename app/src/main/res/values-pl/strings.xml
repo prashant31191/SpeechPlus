@@ -28,4 +28,8 @@
     <string name="no_connection_subtitle">Włącz internet i kliknij na \"Aktualizuj\"</string>
     <string name="no_connection">Brak połączenia z Internetem</string>
     <string name="edit_patter_empty">Pole jest puste, napisz coś</string>
+    <string name="delete_dialog_text">Czy na pewno chcesz usunąć wpis?</string>
+    <string name="ok">OK</string>
+    <string name="back">Wracaj</string>
+    <string name="delete">Usuń</string>
 </resources>

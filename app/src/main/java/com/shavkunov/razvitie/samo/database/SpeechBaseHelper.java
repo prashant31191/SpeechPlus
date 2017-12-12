@@ -20,6 +20,8 @@ public class SpeechBaseHelper extends SQLiteOpenHelper {
     private static String CREATE_TABLE_TR;
     private static String CREATE_TABLE_UK;
 
+    private static String CREATE_TABLE_MY_TWISTERS;
+
     public SpeechBaseHelper(Context context) {
         super(context, DATABASE_NAME, null, VERSION);
 
@@ -31,6 +33,8 @@ public class SpeechBaseHelper extends SQLiteOpenHelper {
         CREATE_TABLE_PT = onCreateTable(DbSchema.NAME_PT);
         CREATE_TABLE_TR = onCreateTable(DbSchema.NAME_TR);
         CREATE_TABLE_UK = onCreateTable(DbSchema.NAME_UK);
+
+        CREATE_TABLE_MY_TWISTERS = onCreateTable(DbSchema.MY_TWISTERS);
     }
 
     @Override
@@ -43,6 +47,8 @@ public class SpeechBaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_PT);
         db.execSQL(CREATE_TABLE_TR);
         db.execSQL(CREATE_TABLE_UK);
+
+        db.execSQL(CREATE_TABLE_MY_TWISTERS);
     }
 
     @Override

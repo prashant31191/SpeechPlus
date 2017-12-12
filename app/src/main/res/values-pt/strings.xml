@@ -28,4 +28,8 @@
     <string name="no_connection_subtitle">Ligue a Internet e clique na \"Atualização\"</string>
     <string name="no_connection">Nenhuma conexão com a Internet</string>
     <string name="edit_patter_empty">O campo está vazio, escreva algo</string>
+    <string name="delete">Excluir</string>
+    <string name="back">Volte</string>
+    <string name="delete_dialog_text">Tem certeza de que deseja excluir a postagem?</string>
+    <string name="ok">OK</string>
 </resources>

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
@@ -100,7 +101,7 @@ public class CardLab {
 
     public List<Patter> getList() {
         List<Patter> list = new ArrayList<>();
-        SpeechCursorWrapper cursor = queryPatters(null, null);
+        SpeechCursorWrapper cursor = queryPatters(getTableForDb(), null, null);
 
         try {
             cursor.moveToFirst();
@@ -108,6 +109,27 @@ public class CardLab {
                 list.add(cursor.getPatter());
                 cursor.moveToNext();
             }
+        } catch (SQLiteException e) {
+            Log.e(getList().toString(), e.getMessage());
+        } finally {
+            cursor.close();
+        }
+
+        return list;
+    }
+
+    public List<Patter> getYourPattersList() {
+        List<Patter> list = new ArrayList<>();
+        SpeechCursorWrapper cursor = queryPatters(DbSchema.MY_TWISTERS, null, null);
+
+        try {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                list.add(cursor.getPatter());
+                cursor.moveToNext();
+            }
+        } catch (SQLiteException e) {
+            Log.e(getYourPattersList().toString(), e.getMessage());
         } finally {
             cursor.close();
         }
@@ -117,7 +139,7 @@ public class CardLab {
 
     public List<Patter> getFavoriteList() {
         List<Patter> list = new ArrayList<>();
-        SpeechCursorWrapper cursor = queryPatters(null, null);
+        SpeechCursorWrapper cursor = queryPatters(getTableForDb(), null, null);
 
         try {
             cursor.moveToFirst();
@@ -127,6 +149,8 @@ public class CardLab {
                 }
                 cursor.moveToNext();
             }
+        } catch (SQLiteException e) {
+            Log.e(getFavoriteList().toString(), e.getMessage());
         } finally {
             cursor.close();
         }
@@ -148,6 +172,11 @@ public class CardLab {
         database.insert(getTableForDb(), null, values);
     }
 
+    public void addYourPatter(Patter p) {
+        ContentValues values = getContentValues(p);
+        database.insert(DbSchema.MY_TWISTERS, null, values);
+    }
+
     public void updateFavorite(Patter patter) {
         ContentValues values = new ContentValues();
         values.put(DbSchema.Cols.FAVORITE, patter.isFavorite() ? 1 : 0);
@@ -165,9 +194,9 @@ public class CardLab {
                 new String[]{String.valueOf(patter.getId())});
     }
 
-    private SpeechCursorWrapper queryPatters(String whereClause, String[] whereArgs) {
+    private SpeechCursorWrapper queryPatters(String table, String whereClause, String[] whereArgs) {
         Cursor cursor = database.query(
-                getTableForDb(),
+                table,
                 null,
                 whereClause,
                 whereArgs,

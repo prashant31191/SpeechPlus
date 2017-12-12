@@ -142,7 +142,7 @@ public class SpeechFragment extends Fragment {
     private void setRecyclerView() {
         speechRecycler.setLayoutManager(SettingsLayoutManager
                 .getLayoutManager(getContext()));
-        speechRecycler.setAdapter(new RecyclerViewAdapter(getActivity(), listItems));
+        speechRecycler.setAdapter(new RecyclerViewAdapter(getActivity(), listItems, false));
     }
 
     @Override

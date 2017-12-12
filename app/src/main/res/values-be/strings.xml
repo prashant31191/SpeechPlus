@@ -28,4 +28,8 @@
     <string name="no_connection_subtitle">Уключыце інтэрнэт і націсніце на кнопку \"Абнавіць\"</string>
     <string name="no_connection">Няма злучэння з інтэрнэтам</string>
     <string name="edit_patter_empty">Поле пустое, напішыце што-небудзь</string>
+    <string name="back">Назад</string>
+    <string name="delete_dialog_text">Вы ўпэўненыя, што жадаеце выдаліць запіс?</string>
+    <string name="delete">Выдаленне</string>
+    <string name="ok">ОК</string>
 </resources>

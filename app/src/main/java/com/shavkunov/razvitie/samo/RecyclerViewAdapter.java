@@ -1,6 +1,8 @@
 package com.shavkunov.razvitie.samo;
 
+import android.app.Dialog;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.droidbyme.dialoglib.AnimUtils;
+import com.droidbyme.dialoglib.DroidDialog;
 import com.google.android.gms.ads.NativeExpressAdView;
 import com.sackcentury.shinebuttonlib.ShineButton;
 import com.shavkunov.razvitie.samo.entity.Patter;
@@ -29,10 +33,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private FragmentActivity fragmentActivity;
     private List<Object> listItems;
     private CardLab cardLab;
+    private boolean isDelete;
 
-    public RecyclerViewAdapter(FragmentActivity fragmentActivity, List<Object> listItems) {
+    public RecyclerViewAdapter(FragmentActivity fragmentActivity, List<Object> listItems,
+                               boolean isDelete) {
         this.fragmentActivity = fragmentActivity;
         this.listItems = listItems;
+        this.isDelete = isDelete;
         cardLab = new CardLab(fragmentActivity);
     }
 
@@ -46,6 +53,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         @BindView(R.id.favorite_button_speech)
         ShineButton favoriteButtonSpeech;
+
+        @BindView(R.id.delete_button_speech)
+        ShineButton deleteButtonSpeech;
 
         public SpeechHolder(View itemView) {
             super(itemView);
@@ -102,6 +112,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 final SpeechHolder speechHolder = (SpeechHolder) holder;
                 final Patter patter = (Patter) listItems.get(position);
 
+                setDeleteButton(speechHolder);
                 setImageView(speechHolder, patter);
                 speechHolder.titleSpeech.setText(patter.getTitle());
                 speechHolder.favoriteButtonSpeech.setChecked(patter.isFavorite());
@@ -130,6 +141,42 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
                 adCardView.addView(adView);
                 break;
+        }
+    }
+
+    private void setDeleteButton(final SpeechHolder speechHolder) {
+        if (isDelete) {
+            speechHolder.deleteButtonSpeech.setVisibility(View.VISIBLE);
+            speechHolder.deleteButtonSpeech.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    speechHolder.deleteButtonSpeech.showAnim();
+
+                    new DroidDialog.Builder(fragmentActivity)
+                            .icon(R.drawable.close)
+                            .title(fragmentActivity.getString(R.string.delete))
+                            .content(fragmentActivity.getString(R.string.delete_dialog_text))
+                            .color(ContextCompat.getColor(fragmentActivity, R.color.colorAccent),
+                                    ContextCompat.getColor(fragmentActivity, R.color.white),
+                                    ContextCompat.getColor(fragmentActivity, R.color.colorAccent))
+                            .cancelable(true, true)
+                            .animation(AnimUtils.AnimFadeInOut)
+                            .positiveButton(fragmentActivity.getString(R.string.ok),
+                                    new DroidDialog.onPositiveListener() {
+                                        @Override
+                                        public void onPositive(Dialog droidDialog) {
+
+                                        }
+                                    })
+                            .negativeButton(fragmentActivity.getString(R.string.back),
+                                    new DroidDialog.onNegativeListener() {
+                                        @Override
+                                        public void onNegative(Dialog droidDialog) {
+                                            droidDialog.cancel();
+                                        }
+                                    }).show();
+                }
+            });
         }
     }
 
